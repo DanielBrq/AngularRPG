@@ -94,7 +94,6 @@ export const EFFECT_SOURCE = {
       SWORD: 'item_weapon_sword',
       SPEAR: 'item_weapon_spear',
       AXE: 'item_weapon_axe',
-      BOW: 'item_weapon_bow',
       DAGGER: 'item_weapon_dagger',
       GRIMOIRE: 'item_weapon_grimoire',
     },

@@ -2,7 +2,6 @@ export const WEAPONS = {
   SWORD: 'sword',
   SPEAR: 'spear',
   AXE: 'axe',
-  BOW: 'bow',
   DAGGER: 'dagger',
   GRIMOIRE: 'grimoire',
 } as const;

@@ -1,4 +1,4 @@
-import { GameEntity } from '@app/core/entities/GameEntity';
+import { GameEntity } from '@app/core/entities/gameEntity/GameEntity';
 
 export class FoeEntity extends GameEntity {
   constructor(
@@ -38,14 +38,11 @@ export class FoeEntity extends GameEntity {
     swordDmg: number,
     spearDmg: number,
     axeDmg: number,
-    bowDmg: number,
     daggerDmg: number,
-    grimoireDmg: number,
 
     swordResistance: number,
     spearResistance: number,
     axeResistance: number,
-    bowResistance: number,
     daggerResistance: number,
     grimoireResistance: number,
   ) {
@@ -79,13 +76,10 @@ export class FoeEntity extends GameEntity {
       swordDmg,
       spearDmg,
       axeDmg,
-      bowDmg,
       daggerDmg,
-      grimoireDmg,
       swordResistance,
       spearResistance,
       axeResistance,
-      bowResistance,
       daggerResistance,
       grimoireResistance,
     );
