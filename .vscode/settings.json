@@ -1,0 +1,31 @@
+{
+  "workbench.iconTheme": "material-icon-theme",
+
+  "material-icon-theme.folders.associations": {
+    "combat": "controller",
+    "entities": "class",
+    "foes": "console",
+    "weapon": "archive",
+    "equipment": "archive",
+    "items": "packages",
+    "characters": "admin",
+    "render": "src",
+    "engine": "src",
+    "scenes": "views",
+    "forest": "resource",
+    "snow-field": "core",
+    "keyboard": "input",
+    "mouse": "input",
+    "runtime": "command",
+    "state": "database",
+    "persistence": "database",
+    "hud": "ui",
+    "menus": "ui",
+    "shell": "command",
+    "effects": "animation",
+    "battleSkills": "skills",
+    "magicDmg": "skills",
+    "physicalDmg": "skills",
+    "support": "skills"
+  }
+}
