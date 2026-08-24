@@ -26,32 +26,75 @@
 
 ## Architecture (src/app)
 
-Layered, framework-agnostic where possible:
+Layered, framework-agnostic where possible. `core/` is pure TS (no Angular/DI).
 
-- `core/` — pure game domain, **plain TS classes, not Angular**. No DI/decorators here.
-  - `core/battleSkills/{magic,passive,physical,special,support}` — skill types (renamed from `magicDmg`→`magic`, `physicalDmg`→`physical`).
-  - `core/combat/`, `core/events/` — combat and event domain.
-  - `core/effects/{ModifierEffect.ts,passiveEffect/effects,statusEffect/effects}` — flattened `ModifierEffect` (was `modifiersEffect/`).
-  - `core/entities/{characters/{mage,warrior/{model,sounds/sfx,sprites}},foes/{bandit,lizzard,undead},items/{equipment,weapon}}`
-- `render/{collision,engine,scenes/{forest,snow-field/{assets,map}}}`
-- `runtime/{commands,state}`
-- `data/{persistence,repositories}`
-- `input/{keyboard,mouse}`
-- `shared/{types,utils}`
-- `sounds/{music,sound}`
-- `ui/{components,hud/{foes/{components,view},player/{components,view},shared/components},menus/{components,main-menu,playground-menu,settings},shell}`
+```mermaid
+flowchart TD
+    app["src/app<br/>app.ts / app.config.ts / app.routes.ts"]
 
-Compacted `tree /A` (`src/app` only, folders):
+    app --> core & data & input & render & runtime & shared & sounds & ui
+
+    subgraph core["core/ — pure domain"]
+        direction TB
+        cBS["battleSkills/"]
+        cBS --> cMagic["magic/<br/>BlazingWaterfall.ts"]
+        cBS --> cPassive["passive/"]
+        cBS --> cPhysical["physical/<br/>HeavySlice.ts"]
+        cBS --> cSpecial["special/"]
+        cBS --> cSupport["support/<br/>Healing.ts"]
+        cCombat["combat/<br/>BattleSystem / DamageCalculator<br/>DodgeSystem / ParrySystem"]
+        cEffects["effects/"]
+        cEffects --> cMod["ModifierEffect.ts"]
+        cEffects --> cPE["passiveEffect/<br/>SurvivalInstinct.ts"]
+        cEffects --> cSE["statusEffect/<br/>Burn / Frostbite / Paralysis / Poison"]
+        cEntities["entities/"]
+        cEntities --> cChars["characters/<br/>mage / warrior{model,sounds/sfx,sprites}"]
+        cEntities --> cFoes["foes/<br/>bandit / lizzard / undead"]
+        cEntities --> cItems["items/<br/>equipment / weapon"]
+        cEvents["events/"]
+    end
+
+    subgraph infra["infra / app layers"]
+        data["data/<br/>persistence / repositories"]
+        input["input/<br/>keyboard / mouse"]
+        render["render/<br/>collision / engine<br/>scenes/forest,snow-field{assets,map}"]
+        runtime["runtime/<br/>commands / state"]
+        shared["shared/<br/>types{EffectTypes,Elements,SkillType,ItemTypes}<br/>utils{Clamp,IdGenerator,Randomizer}"]
+        sounds["sounds/<br/>music/MusicPlayer<br/>sound/SfxPlayer"]
+        ui["ui/<br/>components / hud / menus / shell"]
+        ui --> uiHud["hud/<br/>foes{WeakPoints} / player{HealthBar}<br/>shared{StatusEffect}"]
+        ui --> uiMenus["menus/<br/>components / main-menu<br/>playground-menu / settings"]
+        ui --> uiShell["shell/settings.ts"]
+    end
+
+    %% dependency direction (outer -> core)
+    ui -.-> core
+    runtime -.-> core
+    render -.-> core
+    data -.-> core
+    input -.-> runtime
+    sounds -.-> core
+```
+
+> `ui/` is scaffolded with empty stubs.
+
+<details>
+<summary>tree /A (folders)</summary>
+
 ```
 src\app\{core\{battleSkills\{magic,passive,physical,special,support},combat,effects\{passiveEffect\effects,statusEffect\effects},entities\{characters\{mage,warrior\{model,sounds\sfx,sprites}},foes\{bandit,lizzard,undead},items\{equipment,weapon}},events},data\{persistence,repositories},input\{keyboard,mouse},render\{collision,engine,scenes\{forest,snow-field\{assets,map}}},runtime\{commands,state},shared\{types,utils},sounds\{music,sound},ui\{components,hud\{foes\{components,view},player\{components,view},shared\components},menus\{components,main-menu,playground-menu,settings},shell}}
 ```
 
-`tree /A /F` (`src/app`, with files):
+</details>
+
+<details>
+<summary>tree /A /F (with files)</summary>
+
 ```
 src\app\{app.config.ts,app.html,app.routes.ts,app.ts,core\{index.ts,battleSkills\{index.ts,SkillModel.ts,magic\{BlazingWaterfall.ts,index.ts},passive,physical\{HeavySlice.ts,index.ts},special,support\{Healing.ts,index.ts}},combat\{BattleSystem.ts,DamageCalculator.ts,DodgeSystem.ts,index.ts,ParrySystem.ts},effects\{Effect.ts,ModifierEffect.ts,passiveEffect\{PassiveEffect.ts,effects\{SurvivalInstinct.ts}},statusEffect\{StatusEffect.ts,effects\{Burn.ts,Frostbite.ts,Paralysis.ts,Poison.ts}}},entities\{GameEntity.ts,index.ts,LevelUpSystem.ts,characters\{CharacterEntity.ts,index.ts,mage,warrior\{model,sounds\sfx,sprites}},foes\{FoeEntity.ts,index.ts,bandit,lizzard,undead},items\{index.ts,ItemModel.ts,equipment,weapon}},events},data\{persistence,repositories},input\{keyboard,mouse},render\{collision,engine,scenes\{forest,snow-field\{assets,map}}},runtime\{commands,state},shared\{index.ts,types\{EffectTypes.ts,Elements.ts,index.ts,ItemTypes.ts,SkillType.ts},utils\{Clamp.ts,IdGenerator.ts,index.ts,Randomizer.ts}},sounds\{music\{MusicPlayer.ts},sound\{SfxPlayer.ts}},ui\{components,hud\{foes\{components\{WeakPoints.ts},view\{StatusEffectView.ts}},player\{components\{HealthBar.ts},view\{character.ts,inventory.ts,team.ts}},shared\components\{StatusEffect.ts}},menus\{components,main-menu,playground-menu,settings},shell\{settings.ts}}}
 ```
 
-Note: many `ui/` files are currently empty stubs — the UI layer is scaffolded but not implemented.
+</details>
 
 ## Commits
 
