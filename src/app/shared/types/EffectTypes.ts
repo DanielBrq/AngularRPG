@@ -1,7 +1,7 @@
 export const STATUS_EFFECTS = {
     BURN: 'burn',
     FROSTBITE: 'frostbite',
-    PARALYZED: 'paralyzed',
+    PARALYSIS: 'paralysis',
     POISON: 'poison',
 } as const;
 export type STATUS_EFFECTS = (typeof STATUS_EFFECTS)[keyof typeof STATUS_EFFECTS];

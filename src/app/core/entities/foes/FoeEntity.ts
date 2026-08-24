@@ -14,7 +14,7 @@ export class FoeEntity extends GameEntity {
         physAtk: number,
         physDef: number,
 
-        critProb: number,
+        critChance: number,
         critDmg: number,
 
         magAtk: number,
@@ -59,7 +59,7 @@ export class FoeEntity extends GameEntity {
             speed,
             physAtk,
             physDef,
-            critProb,
+            critChance,
             critDmg,
             magAtk,
             magDef,

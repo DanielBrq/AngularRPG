@@ -4,13 +4,10 @@ import { MODIFIERS_EFFECTS } from "@app/shared/types";
 
 export abstract class ModifierEffect extends Effect {
     constructor(
-        name: string,
-        description: string,
-        protected readonly _duration: number,
+        name: string, description: string, type: MODIFIERS_EFFECTS,
     ) {
-        super(name, description)
+        super(name, description, type)
     }
 
-    abstract remove(target: GameEntity): void;
-
+    override apply(starget: GameEntity, executor: GameEntity): void { }
 }
