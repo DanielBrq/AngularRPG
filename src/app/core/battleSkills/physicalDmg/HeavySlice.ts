@@ -1,4 +1,4 @@
-import { SkillModel } from "../SkillModel";
+import { SkillModel } from "@app/core/battleSkills/SkillModel";
 import { SKILL } from "@app/shared/types";
 
 export class HeavySliceSkill extends SkillModel {

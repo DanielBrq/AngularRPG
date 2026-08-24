@@ -1,7 +1,7 @@
-import { StatusEffect } from "../StatusEffect";
+import { StatusEffect } from "@app/core/effects/statusEffect/StatusEffect";
 import { STATUS_EFFECTS } from "@app/shared/types";
 import { GameEntity } from "@app/core/entities";
-import { DamageCalculator } from "@app/core/system";
+import { DamageCalculator } from "@app/core/combat";
 
 export class Poison extends StatusEffect {
     constructor(
@@ -12,7 +12,7 @@ export class Poison extends StatusEffect {
         super(
             "Poison",
             `Deals Toxin damage each turn \n
-            Stacks: Increase +10% of poison dmg per 5 poison status stack \n`,
+            Stacks: Increases damage by 10% per 5 poison stacks \n`,
             STATUS_EFFECTS.POISON,
             stack,
             duration

@@ -1,4 +1,4 @@
-import { Effect } from "../Effect";
+import { Effect } from "@app/core/effects/Effect";
 import { clamp, GameEntity } from "@app/core/entities";
 import { STATUS_EFFECTS } from "@app/shared/types";
 

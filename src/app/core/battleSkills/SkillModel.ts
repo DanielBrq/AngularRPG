@@ -14,7 +14,7 @@ export abstract class SkillModel {
     ) { }
 
     protected skillBoost(boostLevel: number): void {
-        if (boostLevel > this._maxBoostLevel) throw new Error("Skill user cannot boost further")
+        if (boostLevel > this._maxBoostLevel) throw new Error("Skill cannot be boosted further")
         this._currentBoostLevel = boostLevel;
     }
 

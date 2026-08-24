@@ -1,7 +1,7 @@
-import { StatusEffect } from "../StatusEffect";
+import { StatusEffect } from "@app/core/effects/statusEffect/StatusEffect";
 import { STATUS_EFFECTS } from "@app/shared/types";
 import { GameEntity } from "@app/core/entities";
-import { DamageCalculator } from "@app/core/system";
+import { DamageCalculator } from "@app/core/combat";
 
 export class Burn extends StatusEffect {
     constructor(
@@ -12,7 +12,7 @@ export class Burn extends StatusEffect {
         super(
             "Burn",
             `Deals Heat damage each turn \n
-            Stacks: Increase +10% of burn dmg per 5 status burn stack \n`,
+            Stacks: Increases damage by 10% per 5 burn stacks \n`,
             STATUS_EFFECTS.BURN,
             stack,
             duration

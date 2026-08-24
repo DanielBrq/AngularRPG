@@ -1,4 +1,4 @@
-import { StatusEffect } from "../StatusEffect";
+import { StatusEffect } from "@app/core/effects/statusEffect/StatusEffect";
 import { STATUS_EFFECTS } from "@app/shared/types";
 import { GameEntity } from "@app/core/entities";
 

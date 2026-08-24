@@ -1,4 +1,4 @@
-import { StatusEffect } from "../StatusEffect";
+import { StatusEffect } from "@app/core/effects/statusEffect/StatusEffect";
 import { STATUS_EFFECTS } from "@app/shared/types";
 import { GameEntity } from "@app/core/entities";
 
@@ -9,8 +9,8 @@ export class Frostbite extends StatusEffect {
     ) {
         super(
             "Frostbite",
-            `Lower the target speed by 5% (max 30%) \n
-            Increse 5% per 5 frostbite status stack`,
+            `Reduces target speed by 5% (max 30%) \n
+            Increases damage by 5% per 5 frostbite stacks`,
             STATUS_EFFECTS.FROSTBITE,
             stack,
             duration

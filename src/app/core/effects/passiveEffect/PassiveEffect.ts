@@ -1,4 +1,4 @@
-import { Effect } from "../Effect";
+import { Effect } from "@app/core/effects/Effect";
 import { GameEntity } from "@app/core/entities";
 import { PASSIVE_EFFECTS } from "@app/shared/types";
 
