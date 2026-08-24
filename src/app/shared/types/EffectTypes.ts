@@ -19,8 +19,8 @@ export const MODIFIERS_EFFECTS = {
 
     SPEED_UP: 'speed_up',
     SPEED_DOWN: 'speed_down',
-    CRIT_PROB_UP: 'crit_prob_up',
-    CRIT_PROB_DOWN: 'crit_prob_down',
+    CRIT_CHANCE_UP: 'crit_chance_up',
+    CRIT_CHANCE_DOWN: 'crit_chance_down',
     CRIT_DMG_UP: 'crit_dmg_up',
     CRIT_DMG_DOWN: 'crit_dmg_down',
 
@@ -68,7 +68,7 @@ export const PASSIVE_EFFECTS = {
     HAWKEYE: "hawkeye",       // + Chance to hit
     PHYS_DOUBLE_CAST: "phys_double_cast", // hits phys double hits
     MAG_DOUBLE_CAST: "mag_double_cast", // hit mag double hits
-    SURVIVAL_INSTINCT: "survival_instinct", // Increase dmg, crit prob, crit dmg, speed, at low hp
+    SURVIVAL_INSTINCT: "survival_instinct", // Increase dmg, crit chance, crit dmg, speed, at low hp
     LIFE_MIRACLE: "life_miracle", // Revive when dead at 100% stats
 } as const;
 export type PASSIVE_EFFECTS = (typeof PASSIVE_EFFECTS)[keyof typeof PASSIVE_EFFECTS];
