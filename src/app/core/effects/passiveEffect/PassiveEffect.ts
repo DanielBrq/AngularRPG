@@ -4,9 +4,9 @@ import { PASSIVE_EFFECTS } from "@app/shared/types";
 
 export abstract class PassiveEffect extends Effect {
     constructor(
-        name: string, description: string, type: PASSIVE_EFFECTS,
+        name: string, description: string, effect: PASSIVE_EFFECTS,
     ) {
-        super(name, description, type)
+        super(name, description, effect)
     }
 
     override apply(starget: GameEntity, executor: GameEntity): void { }

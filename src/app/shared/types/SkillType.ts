@@ -1,8 +1,9 @@
 
 export const SKILL = {
-    MAGIC_DMG: "magic_dmg",
-    PHYSICAL_DMG: "physical_dmg",
+    PHYSICAL: "physical",
+    MAGIC: "magic",
     SUPPORT: "support",
-    PASSIVE: "passive"
+    PASSIVE: "passive",
+    SPECIAL: "special"
 } as const;
 export type SkillType = typeof SKILL[keyof typeof SKILL];

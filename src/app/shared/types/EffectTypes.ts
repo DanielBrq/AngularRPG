@@ -1,3 +1,4 @@
+
 export const STATUS_EFFECTS = {
     BURN: 'burn',
     FROSTBITE: 'frostbite',
@@ -19,8 +20,8 @@ export const MODIFIERS_EFFECTS = {
 
     SPEED_UP: 'speed_up',
     SPEED_DOWN: 'speed_down',
-    CRIT_CHANCE_UP: 'crit_chance_up',
-    CRIT_CHANCE_DOWN: 'crit_chance_down',
+    CRIT_PROB_UP: 'crit_prob_up',
+    CRIT_PROB_DOWN: 'crit_prob_down',
     CRIT_DMG_UP: 'crit_dmg_up',
     CRIT_DMG_DOWN: 'crit_dmg_down',
 
@@ -59,6 +60,7 @@ export const MODIFIERS_EFFECTS = {
     DARK_DMG_DOWN: 'dark_dmg_down',
     DARK_RESISTANCE_UP: 'dark_resistance_up',
     DARK_RESISTANCE_DOWN: 'dark_resistance_down',
+
 } as const;
 export type MODIFIERS_EFFECTS = (typeof MODIFIERS_EFFECTS)[keyof typeof MODIFIERS_EFFECTS];
 
@@ -68,7 +70,36 @@ export const PASSIVE_EFFECTS = {
     HAWKEYE: "hawkeye",       // + Chance to hit
     PHYS_DOUBLE_CAST: "phys_double_cast", // hits phys double hits
     MAG_DOUBLE_CAST: "mag_double_cast", // hit mag double hits
-    SURVIVAL_INSTINCT: "survival_instinct", // Increase dmg, crit chance, crit dmg, speed, at low hp
+    SURVIVAL_INSTINCT: "survival_instinct", // Increase dmg, crit prob, crit dmg, speed, at low hp
     LIFE_MIRACLE: "life_miracle", // Revive when dead at 100% stats
 } as const;
 export type PASSIVE_EFFECTS = (typeof PASSIVE_EFFECTS)[keyof typeof PASSIVE_EFFECTS];
+
+export const EFFECT_SOURCE = {
+    PARTY: "party",
+    SKILL: {
+        PHYSICAL: "skill_physical",
+        MAGIC: "skill_magic",
+        SUPPORT: "skill_support",
+        PASSIVE: "skill_passive",
+        SPECIAL: "skill_special",
+    },
+    ITEM: {
+        EQUIPMENT: {
+            HELMET: "item_equipment_helmet",
+            CHEST: "item_equipment_chest",
+            RING: "item_equipment_ring",
+            BELT: "item_equipment_belt",
+            BOOTS: "item_equipment_boots",
+        },
+        WEAPON: {
+            SWORD: "item_weapon_sword",
+            SPEAR: "item_weapon_spear",
+            AXE: "item_weapon_axe",
+            BOW: "item_weapon_bow",
+            DAGGER: "item_weapon_dagger",
+            GRIMOIRE: "item_weapon_grimoire",
+        },
+    },
+} as const
+export type EFFECT_SOURCE = (typeof EFFECT_SOURCE)[keyof typeof EFFECT_SOURCE]

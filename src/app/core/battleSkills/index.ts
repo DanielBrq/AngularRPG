@@ -1,3 +1,3 @@
-export * from './physicalDmg';
-export * from './magicDmg';
+export * from './physical';
+export * from './magic';
 export * from './support';

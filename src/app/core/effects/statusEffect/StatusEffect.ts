@@ -6,11 +6,11 @@ export abstract class StatusEffect extends Effect {
     constructor(
         name: string,
         description: string,
-        type: STATUS_EFFECTS,
+        effect: STATUS_EFFECTS,
         protected _stack: number,
         protected _duration: number,
     ) {
-        super(name, description, type)
+        super(name, description, effect)
     }
 
     override apply(starget: GameEntity, executor: GameEntity): void { }

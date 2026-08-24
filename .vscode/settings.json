@@ -26,9 +26,10 @@
     "passiveEffect": "animation",
     "statusEffect": "animation",
     "battleSkills": "skills",
-    "magicDmg": "skills",
-    "physicalDmg": "skills",
+    "magic": "skills",
+    "physical": "skills",
     "support": "skills",
     "passive": "skills",
+    "special": "skills",
   }
 }
