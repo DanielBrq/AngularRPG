@@ -6,7 +6,7 @@ export class HeavySliceSkill extends SkillModel {
         name: string,
         executorId: string,
         targetId: string,
-        skillType: typeof SKILL.PHYSICAL_DMG,
+        skillType: typeof SKILL.PHYSICAL,
         _maxBoostLevel: number,
         _baseMpCost: number,
         _basePotency: number,
