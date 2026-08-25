@@ -39,20 +39,11 @@ export class BattleStats {
         public lightResistance: number = 0,
     ) { }
 
-    public calculate(
-        baseStats: BaseStats,
-    ): BattleStats;
+    public calculate(baseStats: BaseStats): BattleStats;
 
-    public calculate(
-        baseStats: BaseStats,
-        buildStats: BuildStats,
-    ): BattleStats;
+    public calculate(baseStats: BaseStats, buildStats: BuildStats): BattleStats;
 
-    public calculate(
-        baseStats: BaseStats,
-        buildStats?: BuildStats,
-    ): BattleStats {
-
+    public calculate(baseStats: BaseStats, buildStats?: BuildStats,): BattleStats {
         const initBattleStats: BattleStats = new BattleStats(
             baseStats._maxHp,
             baseStats._maxHp,

@@ -6,7 +6,7 @@ export class FoeEntity extends GameEntity {
     readonly name: string,
     isAlive: boolean = true,
     currentLvl: number,
-    
+
     baseStats: BaseStats,
     battleStats: BattleStats,
   ) {
@@ -20,7 +20,7 @@ export class FoeEntity extends GameEntity {
     )
   }
 
+  override attack(): void { }
 
-  
 }
 

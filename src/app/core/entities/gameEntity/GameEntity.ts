@@ -1,5 +1,7 @@
 import { clamp } from '@app/shared/utils';
 import { BaseStats, CharacterEntity, FoeEntity, BattleStats } from "@app/core/entities";
+import { randomIntegerFromRange } from '@app/shared/utils/Randomizer';
+import { Skill } from '@app/core/battleSkills/Skill';
 
 export type GameEntityType = CharacterEntity | FoeEntity
 
@@ -12,15 +14,29 @@ export abstract class GameEntity {
 
     protected _baseStats: BaseStats,
     protected _battleStats: BattleStats,
+
+    protected skills: Skill[] = [],
+    
   ) { }
 
-  protected attack(): void { }
-
+  // Getters  
   public get baseStats(): BaseStats { return this._baseStats }
 
   public get battleStats(): BattleStats { return this._battleStats }
 
-  protected hasEnoughMP(cost: number): boolean { return this._battleStats.mp >= cost }
+  // Actions
+  protected attack(target: GameEntity): void {
+    target.takeDamage(1)// TODO: DMG calculator
+  }
+
+  private attackRandomTarget(target: GameEntity[]): void {
+    const targetIndex = randomIntegerFromRange(0, target.length - 1);
+    this.attack(target[targetIndex]);
+  }
+
+  private attackAll(target: GameEntity[]): void {
+    target.forEach(entity => this.attack(entity));
+  }
 
   public takeDamage(incomingDmg: number): void {
     if (this.isPositiveValue(incomingDmg)) throw new Error('Value must be negative');
@@ -32,8 +48,6 @@ export abstract class GameEntity {
     }
   }
 
-  private isPositiveValue(amount: number): boolean { return (amount > 0) }
-
   public hpRecover(amount: number): void {
     if (!this.isPositiveValue(amount)) throw new Error('Value must be positive');
     if (this._isAlive) {
@@ -44,5 +58,11 @@ export abstract class GameEntity {
   public mpRecover(amount: number): void {
     if (this._isAlive && !this.isPositiveValue(amount)) throw new Error('Value must be positive');
   }
+
+  // Validators
+  protected hasEnoughMP(cost: number): boolean { return this._battleStats.mp >= cost }
+
+  private isPositiveValue(amount: number): boolean { return (amount > 0) }
+
 
 }

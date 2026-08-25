@@ -41,4 +41,13 @@ export class BuildStats {
         public darkResistance: number = 0,
         public lightResistance: number = 0,
     ) { }
+
+    public addWeaponPhysAtk(atk: number): void {
+        this.physAtk += atk;
+    }
+
+    public addWeaponMagAtk(atk: number): void {
+        this.magAtk += atk;
+    }
+
 }
