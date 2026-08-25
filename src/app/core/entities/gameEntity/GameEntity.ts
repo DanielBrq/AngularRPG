@@ -1,6 +1,7 @@
 import { clamp } from '@app/shared/utils';
-import { BaseStats, BuildStats, DynamicsStats } from "@app/core/entities/gameEntity";
-import { ModifierEffect } from '@app/core/effects/ModifierEffect';
+import { BaseStats, CharacterEntity, FoeEntity, BattleStats } from "@app/core/entities";
+
+export type GameEntityType = CharacterEntity | FoeEntity
 
 export abstract class GameEntity {
   constructor(
@@ -10,53 +11,38 @@ export abstract class GameEntity {
     protected _currentLvl: number,
 
     protected _baseStats: BaseStats,
-    protected _dynamicStats: DynamicsStats,
-
+    protected _battleStats: BattleStats,
   ) { }
 
   protected attack(): void { }
 
-  public get baseStats(): BaseStats {
-    return this._baseStats;
+  public get baseStats(): BaseStats { return this._baseStats }
+
+  public get battleStats(): BattleStats { return this._battleStats }
+
+  protected hasEnoughMP(cost: number): boolean { return this._battleStats.mp >= cost }
+
+  public takeDamage(incomingDmg: number): void {
+    if (this.isPositiveValue(incomingDmg)) throw new Error('Value must be negative');
+
+    if (this._isAlive && incomingDmg >= this._battleStats.hp) {
+      this._isAlive = false;
+    } else if (this._isAlive && incomingDmg < this._battleStats.hp) {
+      this._battleStats.hp = clamp(this._battleStats.hp + incomingDmg, this._battleStats.maxHp);
+    }
   }
 
-  public get dynamicStats(): DynamicsStats {
-    return this._dynamicStats;
+  private isPositiveValue(amount: number): boolean { return (amount > 0) }
+
+  public hpRecover(amount: number): void {
+    if (!this.isPositiveValue(amount)) throw new Error('Value must be positive');
+    if (this._isAlive) {
+      this.battleStats.hp = clamp(this._battleStats.hp + amount, this._battleStats.maxHp);
+    }
   }
 
+  public mpRecover(amount: number): void {
+    if (this._isAlive && !this.isPositiveValue(amount)) throw new Error('Value must be positive');
+  }
 
-
-
-  /*
-    useSkill(mpCost: number): void {
-      if (!this.hasEnoughMP(mpCost)) throw new Error('Not enough magic points');
-      this._mp -= mpCost;
-    }
-  
-    public takeDamage(amount: number): void {
-      if (this.isPositiveValue(amount)) throw new Error('Value must be negative');
-      if (this._isAlive && amount >= this._hp) {
-        this._isAlive = false;
-      } else if (this._isAlive && amount < this._hp) {
-        this._hp = clamp(this._hp + amount, this._maxHp);
-      }
-    }
-  
-    public heal(amount: number): void {
-      if (!this.isPositiveValue(amount)) throw new Error('Value must be positive');
-      if (this._isAlive && amount < this._hp) {
-        this._hp = clamp(this._hp + amount, this._maxHp);
-      }
-    }
-  
-    public mpRecover(amount: number): void {
-      if (this._isAlive && !this.isPositiveValue(amount)) throw new Error('Value must be positive');
-    }
-  
-    private isPositiveValue(amount: number): boolean { return (amount > 0) }
-  
-    private hasEnoughMP(cost: number): boolean {
-      return this._mp >= cost;
-    }
-      */
 }

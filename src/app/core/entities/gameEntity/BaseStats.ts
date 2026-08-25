@@ -11,6 +11,7 @@ export class BaseStats {
 
         public readonly _magAtk: number,
         public readonly _magDef: number,
+        public readonly _maxMp: number = 0,
         public readonly _mp: number,
 
         public readonly _swordDmg: number = 0,
@@ -48,6 +49,7 @@ export class BaseStats {
             this._critDmg,
             this.scaleByLevelCalculator(this._magAtk, level),
             this.scaleByLevelCalculator(this._magDef, level),
+            this.scaleByLevelCalculator(this._maxMp, level),
             this.scaleByLevelCalculator(this._mp, level),
             this._swordDmg,
             this._spearDmg,

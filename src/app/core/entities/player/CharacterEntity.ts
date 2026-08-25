@@ -1,4 +1,4 @@
-import { BaseStats, BuildStats, DynamicsStats, GameEntity } from "@app/core/entities/gameEntity";
+import { BaseStats, BuildStats, GameEntity, BattleStats } from "@app/core/entities/gameEntity";
 
 export abstract class CharacterEntity extends GameEntity {
   constructor(
@@ -7,7 +7,7 @@ export abstract class CharacterEntity extends GameEntity {
     isAlive: boolean = true,
     currentLvl: number,
     baseStats: BaseStats,
-    dynamicStats: DynamicsStats,
+    battleStats: BattleStats,
 
     protected _buildStats: BuildStats,
     protected _currentExp: number,
@@ -19,7 +19,7 @@ export abstract class CharacterEntity extends GameEntity {
       isAlive,
       currentLvl,
       baseStats,
-      dynamicStats,
+      battleStats,
     )
   }
 

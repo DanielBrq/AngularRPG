@@ -1,11 +1,16 @@
 import { Effect } from '@app/core/effects/Effect';
-import { GameEntity } from '@app/core/entities';
+import { GameEntityType } from '@app/core/entities';
 import { PASSIVE_EFFECTS } from '@app/shared/types';
 
 export abstract class PassiveEffect extends Effect {
-  constructor(name: string, description: string, effect: PASSIVE_EFFECTS) {
-    super(name, description, effect);
+  constructor(
+    name: string,
+    description: string,
+    effect: PASSIVE_EFFECTS,
+    target: GameEntityType,
+  ) {
+    super(name, description, effect, target);
   }
 
-  override apply(starget: GameEntity, executor: GameEntity): void {}
+  override apply(target: GameEntityType): void { }
 }

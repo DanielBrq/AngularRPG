@@ -1,26 +1,25 @@
 import { Effect } from '@app/core/effects/Effect';
-import { CharacterEntity, GameEntity } from '@app/core/entities';
+import { GameEntityType } from '@app/core/entities';
 import { MODIFIERS_EFFECTS, EFFECT_SOURCE } from '@app/shared/types';
-
-export type modifierOperationType = 'add' | 'multiply';
 
 export abstract class ModifierEffect extends Effect {
   constructor(
     name: string,
     description: string,
     effect: MODIFIERS_EFFECTS,
+    target: GameEntityType,
     source: EFFECT_SOURCE,
-    value: number,
-    operation: modifierOperationType,
+    percentValue: number,
   ) {
-    super(name, description, effect);
+    super(name, description, effect, target);
   }
 
-  override apply(target: GameEntity, executor: GameEntity): void { }
+  override apply(executor: GameEntityType): void { }
 
-  public modify(target: CharacterEntity): void {
-    
+  public modify(target: GameEntityType): void {
   }
+
+  
 
   //source (trigger) -> ModifierEffect (bridge) -> Entity (character / foe)
 }
