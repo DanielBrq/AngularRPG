@@ -29,6 +29,7 @@ export class VulnerableShard extends SpecialEffect {
     }
 
     public override expire(): void {
+        if (this._duration > 0) return;
         this._target.battleStats.physDef += this._physDefPenalty;
         this._target.battleStats.magDef += this._magDefPenalty;
         this._target.battleStats.speed -= this._speedBonus;

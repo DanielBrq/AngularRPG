@@ -36,6 +36,7 @@ export class SurvivalInstinct extends SpecialEffect {
   }
 
   public override expire(): void {
+    if (this._duration > 0) return;
     this._target.battleStats.physAtk -= this._physAtkBonus;
     this._target.battleStats.critChance -= this._critChanceBonus;
     this._target.battleStats.critDmg -= this._critDmgBonus;

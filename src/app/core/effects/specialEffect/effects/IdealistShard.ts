@@ -31,6 +31,7 @@ export class IdealistShard extends SpecialEffect {
     }
 
     public override expire(): void {
+        if (this._duration > 0) return;
         if (this._isSelfTarget) {
             this._target.battleStats.physAtk += this._physAtkPenalty;
             this._target.battleStats.magAtk += this._magAtkPenalty;

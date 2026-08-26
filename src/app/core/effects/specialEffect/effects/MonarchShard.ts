@@ -55,6 +55,7 @@ export class MonarchShard extends SpecialEffect {
     }
 
     public override expire(): void {
+        if (this._duration > 0) return;
         this._target.battleStats.maxHp -= this._allStatsBonus;
         this._target.battleStats.hp -= Math.floor(this._target.battleStats.maxHp * this._allStatsBonus);
         this._target.battleStats.speed -= this._allStatsBonus;

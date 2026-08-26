@@ -24,6 +24,7 @@ export class WaterDominion extends SpecialEffect {
             duration,
         );
     }
+    //TODO: Feature that exploit extra weakness points solution - Generic solution.
 
     public override apply(): void {
         if (!this.OwnerValidation()) throw new Error('Survival Instinct can only be applied to the Survivor.');

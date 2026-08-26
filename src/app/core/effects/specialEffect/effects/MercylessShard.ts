@@ -25,6 +25,7 @@ export class MercylessShard extends SpecialEffect {
     }
 
     public override expire(): void {
+        if (this._duration > 0) return;
         this._target.battleStats.physAtk -= this._physAtkBonus;
     }
 
