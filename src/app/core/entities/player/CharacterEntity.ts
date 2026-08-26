@@ -1,6 +1,7 @@
 import { BaseStats, BuildStats, GameEntity, BattleStats } from "@app/core/entities/gameEntity";
 import { Skill } from '@app/core/battleSkills/Skill';
 import { Item } from "@app/core/items";
+import { Effect } from "@app/core/effects/Effect";
 
 export abstract class CharacterEntity extends GameEntity {
   constructor(
@@ -11,6 +12,7 @@ export abstract class CharacterEntity extends GameEntity {
     baseStats: BaseStats,
     battleStats: BattleStats,
     skills: Skill[] = [],
+    effects: Effect[],
 
     protected _buildStats: BuildStats,
     protected _currentExp: number,
@@ -31,6 +33,7 @@ export abstract class CharacterEntity extends GameEntity {
       baseStats,
       battleStats,
       skills,
+      effects,
     )
   }
 

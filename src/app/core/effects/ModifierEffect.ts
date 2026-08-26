@@ -8,10 +8,19 @@ export abstract class ModifierEffect extends Effect {
     description: string,
     effect: MODIFIERS_EFFECTS,
     target: GameEntityType,
-    source: EFFECT_SOURCE,
-    percentValue: number,
+    stack: number,
+    duration: number,
+    protected source: EFFECT_SOURCE,
+    protected percentValue: number,
   ) {
-    super(name, description, effect, target);
+    super(
+      name,
+      description,
+      effect,
+      target,
+      stack,
+      duration,
+    );
   }
 
   override apply(executor: GameEntityType): void { }
@@ -19,7 +28,7 @@ export abstract class ModifierEffect extends Effect {
   public modify(target: GameEntityType): void {
   }
 
-  
+
 
   //source (trigger) -> ModifierEffect (bridge) -> Entity (character / foe)
 }

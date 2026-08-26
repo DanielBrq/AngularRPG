@@ -1,5 +1,5 @@
 import { Effect } from '@app/core/effects/Effect';
-import { clamp, GameEntity, CharacterEntity, FoeEntity, GameEntityType } from '@app/core/entities';
+import { GameEntityType } from '@app/core/entities';
 import { STATUS_EFFECTS } from '@app/shared/types';
 
 export abstract class StatusEffect extends Effect {
@@ -8,29 +8,17 @@ export abstract class StatusEffect extends Effect {
     description: string,
     effect: STATUS_EFFECTS,
     target: GameEntityType,
-    protected _stack: number,
-    protected _duration: number,
+    stack: number,
+    duration: number,
   ) {
-    super(name, description, effect, target);
+    super(
+      name,
+      description,
+      effect,
+      target,
+      stack,
+      duration,
+    );
   }
 
-  override apply(target: GameEntity | CharacterEntity | FoeEntity): void { }
-
-  increaseDuration(turns: number = 1): void {
-    this._duration = clamp(this._duration + turns, 9);
-  }
-
-  decreaseDuration(turns: number = 1): void {
-    this._duration = clamp(this._duration - turns, 9);
-  }
-
-  expire(): void { }
-
-  isExpired(): boolean {
-    if (this._duration > 0) {
-      return false;
-    } else {
-      return true;
-    }
-  }
 }

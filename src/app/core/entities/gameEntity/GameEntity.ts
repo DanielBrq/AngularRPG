@@ -2,6 +2,7 @@ import { clamp } from '@app/shared/utils';
 import { BaseStats, CharacterEntity, FoeEntity, BattleStats } from "@app/core/entities";
 import { randomIntegerFromRange } from '@app/shared/utils/Randomizer';
 import { Skill } from '@app/core/battleSkills/Skill';
+import { Effect, EffectType } from "@app/core/effects/Effect";
 
 export type GameEntityType = CharacterEntity | FoeEntity
 
@@ -16,13 +17,31 @@ export abstract class GameEntity {
     protected _battleStats: BattleStats,
 
     protected skills: Skill[] = [],
-    
+    protected _effects: Effect[],
+
   ) { }
 
-  // Getters  
+  //#region getters
   public get baseStats(): BaseStats { return this._baseStats }
-
   public get battleStats(): BattleStats { return this._battleStats }
+  public get setEntityEffects(): Effect[] { return this._effects }
+  public get isAlive() { return this._isAlive }
+  //#endregion
+
+
+  // Setter
+  public set setEntityEffects(incomingEffect: Effect) {
+    const existingEffect = this._effects.find(e => e.getEffect === incomingEffect.getEffect);
+    if (existingEffect) {
+      const stackable = incomingEffect;
+
+
+
+
+    } else {
+      this._effects.push(incomingEffect);
+    }
+  }
 
   // Actions
   protected attack(target: GameEntity): void {

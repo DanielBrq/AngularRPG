@@ -1,12 +1,12 @@
 import { Effect } from '@app/core/effects/Effect';
 import { GameEntityType } from '@app/core/entities';
-import { PASSIVE_EFFECTS } from '@app/shared/types';
+import { SPECIAL_EFFECTS } from '@app/shared/types';
 
-export abstract class PassiveEffect extends Effect {
+export abstract class SpecialEffect extends Effect {
   constructor(
     name: string,
     description: string,
-    effect: PASSIVE_EFFECTS,
+    effect: SPECIAL_EFFECTS,
     target: GameEntityType,
     stack: number,
     duration: number,
@@ -21,6 +21,8 @@ export abstract class PassiveEffect extends Effect {
     );
   }
 
+  apply(target: GameEntityType): void { }
 
+  expire(): void { }
 
 }
