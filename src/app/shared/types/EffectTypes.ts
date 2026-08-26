@@ -78,8 +78,11 @@ export const SPECIAL_EFFECTS = {
 
   // ## The Survivor character
   SURVIVAL_INSTINCT: 'survival_instinct',
-  SHARDED_SOUL: 'sharded_soul', // monarch mode: Raise (30%) all atributes of the party (5 turns), mercyless mode: raise self atk dmg (+100%), vulnerable mode: lower self def (-40%) and raise speed (+100%) , idealist mode: lower self phys and mag dmg (-100%) and raise all party speed (+200%) 
-  WATER_DOMINION: 'water_dominion', // grant self the hability to exploit cold weakness with any attack, raise self cold dmg (+100%) (5 turns).
+  MONARCH_SHARD: 'monarch_shard',
+  MERCYLESS_SHARD: 'mercyless_shard',
+  VULNERABLE_SHARD: 'vulnerable_shard',
+  IDEALIST_SHARD: 'idealist_shard',
+  WATER_DOMINION: 'water_dominion',
 
   // ## The Warrior character
   THE_DULL_BLADE: 'the_dull_blade', // low self def (-80%), increment physAtk (+50%), crits chance (+30%), critDmg(+100%) and speed (+40%) for (3 turns)

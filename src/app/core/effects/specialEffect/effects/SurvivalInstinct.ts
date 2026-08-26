@@ -13,7 +13,7 @@ export class SurvivalInstinct extends SpecialEffect {
   ) {
     super(
       'Survival Instinct',
-      `Increase Physical Damage (50%), Critical Chance (150%), \n
+      `Increase self Physical Damage (50%), Critical Chance (150%), \n
       Critical Damage (30%) and Speed (40%) \n
       while HP is lower than 25%`,
       SPECIAL_EFFECTS.SURVIVAL_INSTINCT,

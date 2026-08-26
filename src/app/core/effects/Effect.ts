@@ -21,6 +21,14 @@ export abstract class Effect {
     return this._effect;
   }
 
+  public get getDuration(): number {
+    return this._duration;
+  }
+
+  public set setDuration(duration: number) {
+    this._duration = duration;
+  }
+
   public increaseDuration(turns: number = 1): void {
     this._duration = clamp(this._duration + turns, 9);
   }
