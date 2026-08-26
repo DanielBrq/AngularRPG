@@ -13,6 +13,7 @@ export abstract class PassiveSkill extends Skill {
     ) {
         super(
             name,
+            '',
             target,
             SKILL.PASSIVE
         )

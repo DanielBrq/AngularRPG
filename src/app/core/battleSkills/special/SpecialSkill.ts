@@ -6,6 +6,7 @@ import { SkillType, SKILL } from '@app/shared/types';
 export abstract class SpecialSkill extends Skill {
     constructor(
         protected readonly name: string,
+        protected description: string,
         protected target: GameEntityType,
         protected skillType: SkillType,
 
@@ -15,6 +16,7 @@ export abstract class SpecialSkill extends Skill {
     ) {
         super(
             name,
+            description,
             target,
             SKILL.SPECIAL
         )

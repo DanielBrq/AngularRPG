@@ -2,6 +2,7 @@ import { SpecialEffect } from '@app/core/effects/';
 import { CharacterEntity } from '@app/core/entities';
 import { SPECIAL_EFFECTS } from '@app/shared/types';
 import { CharacterLabelType } from '@app/shared/types';
+import { i18nTranslation } from '@app/shared/i18n/i18n';
 
 export class VulnerableShard extends SpecialEffect {
     constructor(
@@ -38,4 +39,6 @@ export class VulnerableShard extends SpecialEffect {
     private OwnerValidation(): boolean {
         return this._target.id === CharacterLabelType.SURVIVOR.id;
     }
+    public getName(): string { return i18nTranslation('effects.special.vulnerableShard.name', {}); }
+    public getDescription(): string { return i18nTranslation('effects.special.vulnerableShard.description', { defence: () => this._physDefPenalty * 100, speed: () => this._speedBonus * 100, duration: () => this.duration }); }
 }

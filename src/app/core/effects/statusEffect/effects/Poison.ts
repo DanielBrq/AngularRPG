@@ -2,6 +2,7 @@ import { StatusEffect } from '@app/core/effects/statusEffect/StatusEffect';
 import { STATUS_EFFECTS } from '@app/shared/types';
 import { GameEntityType } from '@app/core/entities';
 import { DamageCalculator } from '@app/core/combat';
+import { i18nTranslation } from '@app/shared/i18n/i18n';
 
 export class Poison extends StatusEffect {
   constructor(
@@ -26,6 +27,11 @@ export class Poison extends StatusEffect {
 
     //_dmg save the result of mag dmg calculator and apply for X turns
   }
+
+  override expire(): void { }
+
+  public getName(): string { return i18nTranslation('effects.status.poison.name', {}); }
+  public getDescription(): string { return i18nTranslation('effects.status.poison.description', {}); }
 
   private calculateDmg(target: GameEntityType): number {
     //TODO: refactor create and use DamageCalculator.ts instead of getting base stats

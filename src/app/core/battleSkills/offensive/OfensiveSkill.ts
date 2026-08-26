@@ -21,6 +21,7 @@ export abstract class OfensiveSkill extends Skill {
     ) {
         super(
             name,
+            '',
             target,
             SKILL.OFENSIVE
         )

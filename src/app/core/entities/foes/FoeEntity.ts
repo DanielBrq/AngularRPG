@@ -17,10 +17,11 @@ export class FoeEntity extends GameEntity {
       currentLvl,
       baseStats,
       battleStats,
+      [],
+      [],
     )
   }
 
   override attack(): void { }
 
 }
-

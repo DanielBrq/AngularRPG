@@ -2,15 +2,16 @@ import { SpecialEffect } from '@app/core/effects/';
 import { CharacterEntity } from '@app/core/entities';
 import { SPECIAL_EFFECTS } from '@app/shared/types';
 import { CharacterLabelType } from '@app/shared/types';
+import { i18nTranslation } from '@app/shared/i18n/i18n';
 
 export class MonarchShard extends SpecialEffect {
     constructor(
         target: CharacterEntity,
-        private readonly _allStatsBonus: number = 0.2,
+        public readonly _allStatsBonus: number = 0.2,
     ) {
         super(
             'Monarch Shard',
-            `Raise all stats (+20%) (5 turns).`,
+            'Raise all party members stats (+20%) (5 turns).',
             SPECIAL_EFFECTS.MONARCH_SHARD,
             target,
             1,
@@ -87,6 +88,17 @@ export class MonarchShard extends SpecialEffect {
         this._target.battleStats.toxinResistance -= this._allStatsBonus;
         this._target.battleStats.darkResistance -= this._allStatsBonus;
         this._target.battleStats.lightResistance -= this._allStatsBonus;
+    }
+
+    public getName(): string {
+        return i18nTranslation('effects.special.monarchShard.name', {});
+    }
+
+    public getDescription(): string {
+        return i18nTranslation('effects.special.monarchShard.description', {
+            bonus: () => this._allStatsBonus * 100,
+            duration: () => this._duration,
+        });
     }
 
     private OwnerValidation(): boolean {

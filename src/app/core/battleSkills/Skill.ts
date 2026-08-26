@@ -3,7 +3,8 @@ import { GameEntityType } from '@app/core/entities';
 // TODO: Finish skills feature 
 export abstract class Skill {
   constructor(
-    public readonly _name: string,
+    protected readonly _name: string,
+    protected readonly _description: string,
     protected _target: GameEntityType,
     protected _skillType: SkillType,
   ) { }

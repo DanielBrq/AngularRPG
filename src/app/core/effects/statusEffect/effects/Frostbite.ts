@@ -1,6 +1,7 @@
 import { StatusEffect } from '@app/core/effects/statusEffect/StatusEffect';
 import { STATUS_EFFECTS } from '@app/shared/types';
 import { GameEntityType } from '@app/core/entities';
+import { i18nTranslation } from '@app/shared/i18n/i18n';
 
 export class Frostbite extends StatusEffect {
   constructor(
@@ -22,4 +23,9 @@ export class Frostbite extends StatusEffect {
   override apply(target: GameEntityType): void {
     // Lower target speed by 20%
   }
+
+  override expire(): void { }
+
+  public getName(): string { return i18nTranslation('effects.status.frostbite.name', {}); }
+  public getDescription(): string { return i18nTranslation('effects.status.frostbite.description', {}); }
 }

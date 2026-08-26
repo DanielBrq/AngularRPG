@@ -20,6 +20,7 @@ export abstract class SupportSkill extends Skill {
     ) {
         super(
             name,
+            '',
             target,
             SKILL.SUPPORT
         )

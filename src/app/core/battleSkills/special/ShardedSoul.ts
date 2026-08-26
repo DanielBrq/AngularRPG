@@ -6,6 +6,7 @@ import { MercylessShard } from '@app/core/effects/specialEffect/effects/Mercyles
 import { VulnerableShard } from '@app/core/effects/specialEffect/effects/VulnerableShard';
 import { IdealistShard } from '@app/core/effects/specialEffect/effects/IdealistShard';
 import { CharacterLabelType } from '@app/shared/types';
+import { i18nTranslation } from '@app/shared/i18n/i18n';
 
 export class ShardedSoul extends SpecialSkill {
     constructor(
@@ -13,6 +14,7 @@ export class ShardedSoul extends SpecialSkill {
     ) {
         super(
             'Sharded Soul',
+            'Raise all stats (+20%) (5 turns).',
             target,
             SKILL.SPECIAL,
             [],
@@ -64,4 +66,7 @@ export class ShardedSoul extends SpecialSkill {
             throw new Error('Sharded Soul can only be used by the Survivor.');
         }
     }
+
+    public getName(): string { return i18nTranslation('skills.special.shardedSoul.name', {}); }
+    public getDescription(): string { return i18nTranslation('skills.special.shardedSoul.description', { bonus: () => 20, duration: () => this._duration }); }
 }

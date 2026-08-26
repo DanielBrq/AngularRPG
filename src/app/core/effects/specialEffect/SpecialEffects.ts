@@ -4,12 +4,12 @@ import { SPECIAL_EFFECTS } from '@app/shared/types';
 
 export abstract class SpecialEffect extends Effect {
   constructor(
-    name: string,
-    description: string,
-    effect: SPECIAL_EFFECTS,
-    target: GameEntityType,
-    stack: number,
-    duration: number,
+    protected name: string,
+    protected description: string,
+    protected effect: SPECIAL_EFFECTS,
+    protected target: GameEntityType,
+    protected stack: number,
+    protected duration: number,
   ) {
     super(
       name,
