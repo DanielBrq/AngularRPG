@@ -33,5 +33,6 @@
     "support": "skills",
     "passive": "skills",
     "special": "skills",
+    "offensive": "skills",
   }
 }
