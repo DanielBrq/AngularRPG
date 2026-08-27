@@ -1,7 +1,8 @@
 import { BaseStats, BuildStats, GameEntity, BattleStats } from "@app/core/entities/gameEntity";
 import { Skill } from '@app/core/skills/';
-import { Item } from "@app/core/items";
+import { Equipment } from "@app/core";
 import { Effect } from "@app/core/effects/Effect";
+import { Inventory } from "@app/core/entities/player";
 
 export abstract class CharacterEntity extends GameEntity {
   constructor(
@@ -13,16 +14,17 @@ export abstract class CharacterEntity extends GameEntity {
     battleStats: BattleStats,
     skills: Skill[] = [],
     effects: Effect[],
+    private inventory: Inventory,
 
     protected _buildStats: BuildStats,
-    protected _currentExp: number,
-    protected _expToNextLevel: number,
-    protected _weapon: Item,
-    protected _helmet: Item,
-    protected _chest: Item,
-    protected _ring: Item,
-    protected _belt: Item,
-    protected _boots: Item,
+    protected _currentExp: number = 0,
+    protected _expToNextLevel: number = 0,
+    protected _weapon?: Equipment,
+    protected _helmet?: Equipment,
+    protected _chest?: Equipment,
+    protected _ring?: Equipment,
+    protected _belt?: Equipment,
+    protected _boots?: Equipment,
 
   ) {
     super(
@@ -37,13 +39,77 @@ export abstract class CharacterEntity extends GameEntity {
     )
   }
 
-  public get buildStats(): BuildStats { return this.buildStats }
+  //#region getters
+  public get buildStats(): BuildStats { return this._buildStats }
 
-  // Getters
-  get helmet(): Item { return this._helmet }
-  get chest(): Item { return this._chest }
-  get ring(): Item { return this._ring }
-  get belt(): Item { return this._belt }
-  get boots(): Item { return this._boots }
-  get weapon(): Item { return this._weapon }
+  public get helmet(): Equipment {
+    if (!this._helmet) throw new Error("There's not any helmet equiped");
+    return this._helmet
+  }
+  public get chest(): Equipment {
+    if (!this._chest) throw new Error("There's not any chest equiped");
+    return this._chest
+  }
+  public get ring(): Equipment {
+    if (!this._ring) throw new Error("There's not any ring equiped");
+    return this._ring
+  }
+  public get belt(): Equipment {
+    if (!this._belt) throw new Error("There's not any belt equiped");
+    return this._belt
+  }
+  public get boots(): Equipment {
+    if (!this._boots) throw new Error("There's not any boots equiped");
+    return this._boots
+  }
+  public get weapon(): Equipment {
+    if (!this._weapon) throw new Error("There's not any Weapon equiped");
+    return this._weapon
+  }
+  public get getInventory() {
+    return this.inventory;
+  }
+  //#endregion
+
+  public set setPlayerWeapon(weapon: Equipment) {
+    const req = this.getInventory.getEquipment(weapon);
+    req.setOwner = this._id;
+    if (this._weapon) this._weapon.removeOwner = this._id;
+    this._weapon = req
+  }
+
+  public set setHelmet(equipment: Equipment) {
+    this._helmet = this.equipSlot(equipment, this._helmet)
+  }
+
+  public set setChest(equipment: Equipment) {
+    this._chest = this.equipSlot(equipment, this._chest)
+  }
+
+  public set setRing(equipment: Equipment) {
+    this._ring = this.equipSlot(equipment, this._ring)
+  }
+
+  public set setBelt(equipment: Equipment) {
+    this._belt = this.equipSlot(equipment, this._belt)
+  }
+
+  public set setBoots(equipment: Equipment) {
+    this._boots = this.equipSlot(equipment, this._boots)
+  }
+
+  public removePlayerWeapon(): void {
+    const req = this._weapon;
+    if (!req) throw new Error("Not found");
+    req.removeOwner = this._id;
+    this._weapon = undefined;
+  }
+
+  private equipSlot(equipment: Equipment, current?: Equipment): Equipment {
+    const req = this.getInventory.getEquipment(equipment);
+    req.setOwner = this._id;
+    if (current) current.removeOwner = this._id;
+    return req;
+  }
+
 }

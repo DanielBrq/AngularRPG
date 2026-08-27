@@ -22,6 +22,7 @@ export abstract class GameEntity {
   ) { }
 
   //#region getters
+  public get getId() { return this._id }
   public get baseStats(): BaseStats { return this._baseStats }
   public get battleStats(): BattleStats { return this._battleStats }
   public get setEntityEffects(): Effect[] { return this._effects }
@@ -35,7 +36,7 @@ export abstract class GameEntity {
     if (existingEffect) {
       const stackable = incomingEffect;
 
-
+      // TODO: 
 
     } else {
       this._effects.push(incomingEffect);
