@@ -23,7 +23,7 @@ export class HeavySliceSkill extends Skill {
     );
   }
 
-  // ponytail: flat potency * physAtk, real dmg formula lives in GameEntity's TODO calculator
+  // ponytail: flat potency * physAtk, real dmg formula lives in GameEntity's TODO: calculator
   public override execute(target: GameEntityType): void {
     const dmg = Math.round(this._basePotency * target.battleStats.physAtk);
     target.takeDamage(-dmg);

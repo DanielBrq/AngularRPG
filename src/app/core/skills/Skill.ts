@@ -7,7 +7,7 @@ export abstract class Skill {
     protected readonly _description: string,
     protected _target: GameEntityType,
     protected _skillType: SkillType,
-    protected _maxBoostLevel: number = 3,
+    protected _maxBoostLevel: number = 7,
     protected _baseMpCost: number = 0,
     protected _basePotency: number = 1,
     protected _currentBoostLevel: number = 1,
