@@ -1,4 +1,4 @@
-import { Skill } from '@app/core/battleSkills/';
+import { Skill } from '@app/core/skills/Skill';
 import { GameEntityType } from '@app/core/entities';
 import { SKILL } from '@app/shared/types';
 import { i18nTranslation } from '@app/shared/i18n/i18n';
