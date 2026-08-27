@@ -1,5 +1,5 @@
-export * from './offensive/physical';
-export * from './offensive/magic';
+export * from './offensive/HeavySlice';
+export * from './offensive/BlazingWaterfall';
 export * from './support';
 export * from './special';
 export * from './Skill';

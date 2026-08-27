@@ -37,7 +37,6 @@ export abstract class GameEntity {
 
 
 
-
     } else {
       this._effects.push(incomingEffect);
     }

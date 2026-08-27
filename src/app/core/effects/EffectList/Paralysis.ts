@@ -7,7 +7,8 @@ export class Paralysis extends Effect {
   constructor(
     duration: number = 2,
     stack: number = 1,
-    entity: GameEntityType
+    entity: GameEntityType,
+    isBeneficial: boolean = false,
   ) {
     super(
       'Paralysis',
@@ -16,6 +17,7 @@ export class Paralysis extends Effect {
       entity,
       stack,
       duration,
+      isBeneficial
     );
   }
 

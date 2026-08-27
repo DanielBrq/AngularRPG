@@ -1,4 +1,4 @@
-import { SpecialSkill } from '../SpecialSkill';
+﻿import { SpecialSkill } from '../SpecialSkill';
 import { CharacterEntity } from '@app/core/entities';
 import { CharacterLabelType } from '@app/shared/types';
 import { i18nTranslation } from '@app/shared/i18n/i18n';
@@ -48,6 +48,6 @@ export class WaterDominion extends SpecialSkill {
     private getSpeedBonus(): number {
         return Math.floor(this._target.battleStats.speed / 100) * 0.12;
     }
-    public getName(): string { return i18nTranslation('effects.special.waterDominion.name', {}); }
-    public getDescription(): string { return i18nTranslation('effects.special.waterDominion.description', { coldDmg: () => this._coldDmgBonus * 100, heatResistance: () => this._heatResistanceBonus * 100, speedBonus: () => this._speedBonus * 100, duration: () => this._duration }); }
+    public getName(): string { return i18nTranslation('skills.special.waterDominion.name', {}); }
+    public getDescription(): string { return i18nTranslation('skills.special.waterDominion.description', { coldDmg: () => this._coldDmgBonus * 100, heatResistance: () => this._heatResistanceBonus * 100, speedBonus: () => this._speedBonus * 100, duration: () => this._duration }); }
 }

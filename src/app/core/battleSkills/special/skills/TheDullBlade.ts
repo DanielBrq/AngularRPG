@@ -1,4 +1,4 @@
-import { SpecialSkill } from '../SpecialSkill';
+﻿import { SpecialSkill } from '../SpecialSkill';
 import { GameEntityType } from "@app/core/entities";
 import { CharacterLabelType } from "@app/shared/types";
 import { i18nTranslation } from '@app/shared/i18n/i18n';
@@ -50,6 +50,6 @@ export class TheDullBlade extends SpecialSkill {
     private OwnerValidation(): boolean {
         return this._target.id === CharacterLabelType.WARRIOR.id;
     }
-    public getName(): string { return i18nTranslation('effects.special.theDullBlade.name', {}); }
-    public getDescription(): string { return i18nTranslation('effects.special.theDullBlade.description', { defence: () => this._physDefPenalty * 100, attack: () => this._physAtkBonus * 100, critChance: () => this._critChanceBonus * 100, critDamage: () => this._critDmgBonus * 100, speed: () => this._speedBonus * 100, duration: () => this._duration }); }
+    public getName(): string { return i18nTranslation('skills.special.theDullBlade.name', {}); }
+    public getDescription(): string { return i18nTranslation('skills.special.theDullBlade.description', { defence: () => this._physDefPenalty * 100, attack: () => this._physAtkBonus * 100, critChance: () => this._critChanceBonus * 100, critDamage: () => this._critDmgBonus * 100, speed: () => this._speedBonus * 100, duration: () => this._duration }); }
 }

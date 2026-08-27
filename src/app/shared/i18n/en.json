@@ -1,11 +1,5 @@
 {
     "skills": {
-        "special": {
-            "shardedSoul": {
-                "name": "Sharded Soul",
-                "description": "Raise all stats (+{{bonus}}%) ({{duration}} turns)."
-            }
-        },
         "offensive": {
             "characters": {},
             "foes": {},
@@ -21,9 +15,6 @@
             }
         },
         "passive": {},
-        "support": {}
-    },
-    "effects": {
         "special": {
             "idealistShard": {
                 "name": "Idealist Shard",
@@ -54,8 +45,15 @@
                 "description": "Grant self the ability to exploit cold weakness with any attack (based on Physical Damage). Raise Cold Damage (+{{coldDmg}}%), Heat Resistance (+{{heatResistance}}%), and Physical Damage (+{{speedBonus}}% per 100 Speed points) ({{duration}} turns)."
             }
         },
+        "support": {}
+    },
+    "effects": {
         "passive": {},
         "status": {
+            "burn": {
+                "name": "Burn",
+                "description": "Deals Heat damage each turn. Stacks increase damage by 10% per 5 burn stacks."
+            },
             "frostbite": {
                 "name": "Frostbite",
                 "description": "Reduces target speed by 5% (max 30%). Increases damage by 5% per 5 frostbite stacks."
@@ -67,10 +65,6 @@
             "poison": {
                 "name": "Poison",
                 "description": "Deals Toxin damage each turn. Stacks increase damage by 10% per 5 poison stacks."
-            },
-            "burn": {
-                "name": "Burn",
-                "description": "Deals Heat damage each turn. Stacks increase damage by 10% per 5 burn stacks."
             }
         }
     },

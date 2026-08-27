@@ -10,6 +10,7 @@ export class Poison extends Effect {
     duration: number = 3,
     stack: number = 1,
     target: GameEntityType,
+    isBeneficial: boolean = false,
   ) {
     super(
       'Poison',
@@ -19,6 +20,7 @@ export class Poison extends Effect {
       target,
       stack,
       duration,
+      isBeneficial
     );
   }
 

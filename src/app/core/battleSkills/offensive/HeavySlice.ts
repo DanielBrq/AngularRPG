@@ -1,28 +1,34 @@
-import { OfensiveSkill } from '@app/core/battleSkills/offensive/OfensiveSkill';
+import { Skill } from '@app/core/battleSkills/';
 import { GameEntityType } from '@app/core/entities';
 import { SKILL } from '@app/shared/types';
+import { i18nTranslation } from '@app/shared/i18n/i18n';
 
-export class HeavySliceSkill extends OfensiveSkill {
+export class HeavySliceSkill extends Skill {
   constructor(
-    name: string,
     target: GameEntityType,
-    skillType: typeof SKILL.OFENSIVE,
-    _maxBoostLevel: number = 3,
-    _baseMpCost: number = 0,
-    _basePotency: number = 1,
-    _currentBoostLevel: number = 1,
+    baseMpCost: number = 0,
+    basePotency: number = 1,
+    maxBoostLevel: number = 3,
+    currentBoostLevel: number = 1,
   ) {
     super(
-      name,
+      'Heavy Slice',
+      'Deals physical damage.',
       target,
-      skillType,
-      _baseMpCost,
-      _basePotency,
-      2,
-      _maxBoostLevel,
-      _currentBoostLevel,
+      SKILL.OFENSIVE,
+      maxBoostLevel,
+      baseMpCost,
+      basePotency,
+      currentBoostLevel,
     );
   }
 
-  public override execute(): void {}
+  // ponytail: flat potency * physAtk, real dmg formula lives in GameEntity's TODO calculator
+  public override execute(target: GameEntityType): void {
+    const dmg = Math.round(this._basePotency * target.battleStats.physAtk);
+    target.takeDamage(-dmg);
+  }
+
+  public getName(): string { return i18nTranslation('skills.offensive.common.heavySlice.name', {}); }
+  public getDescription(): string { return i18nTranslation('skills.offensive.common.heavySlice.description', {}); }
 }

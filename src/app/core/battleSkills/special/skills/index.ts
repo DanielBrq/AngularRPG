@@ -1,4 +1,4 @@
-export * from './MonarchShard';
+﻿export * from './MonarchShard';
 export * from './MercylessShard';
 export * from './VulnerableShard';
 export * from './IdealistShard';

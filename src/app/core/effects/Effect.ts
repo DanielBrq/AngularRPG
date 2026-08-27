@@ -12,6 +12,7 @@ export abstract class Effect {
     protected _target: GameEntityType,
     protected _stack: number,
     protected _duration: number,
+    protected _isBeneficial: boolean,
   ) { }
 
   abstract apply(target: GameEntityType): void;
@@ -19,6 +20,10 @@ export abstract class Effect {
 
   public get getEffect(): EffectType {
     return this._effect;
+  }
+
+  public get isBeneficial(): boolean {
+    return this.isBeneficial;
   }
 
   public get getDuration(): number {

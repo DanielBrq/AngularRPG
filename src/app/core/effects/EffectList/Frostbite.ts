@@ -8,6 +8,7 @@ export class Frostbite extends Effect {
     duration: number = 2,
     stack: number = 1,
     target: GameEntityType,
+    isBeneficial: boolean = false,
   ) {
     super(
       'Frostbite',
@@ -17,6 +18,7 @@ export class Frostbite extends Effect {
       target,
       stack,
       duration,
+      isBeneficial
     );
   }
 
