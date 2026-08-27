@@ -1,4 +1,4 @@
-import { StatusEffect } from "@app/core/effects/statusEffect/StatusEffect";
+import { Effect } from "@app/core/effects/Effect";
 import { Skill } from "../Skill";
 import { GameEntityType } from '@app/core/entities';
 import { SkillType, SKILL } from '@app/shared/types';
@@ -16,7 +16,7 @@ export abstract class OfensiveSkill extends Skill {
         protected _currentBoostLevel: number = 0,       // (0-[maxBoostLevel])
 
         //Status Effects
-        protected _statusEffects?: StatusEffect[],       // Status Effects
+        protected _statusEffects?: Effect[],             // Status Effects
         protected _duration?: number,                   // Skills turns Duration
     ) {
         super(

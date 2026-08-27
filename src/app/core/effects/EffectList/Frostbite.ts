@@ -1,9 +1,9 @@
-import { StatusEffect } from '@app/core/effects/statusEffect/StatusEffect';
+import { Effect } from '@app/core/effects/Effect';
 import { STATUS_EFFECTS } from '@app/shared/types';
 import { GameEntityType } from '@app/core/entities';
 import { i18nTranslation } from '@app/shared/i18n/i18n';
 
-export class Frostbite extends StatusEffect {
+export class Frostbite extends Effect {
   constructor(
     duration: number = 2,
     stack: number = 1,
