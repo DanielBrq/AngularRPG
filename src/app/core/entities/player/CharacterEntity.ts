@@ -1,5 +1,5 @@
 import { BaseStats, BuildStats, GameEntity, BattleStats } from "@app/core/entities/gameEntity";
-import { Skill } from '@app/core/battleSkills/Skill';
+import { Skill } from '@app/core/skills/';
 import { Item } from "@app/core/items";
 import { Effect } from "@app/core/effects/Effect";
 
