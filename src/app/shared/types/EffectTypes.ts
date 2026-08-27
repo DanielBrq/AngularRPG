@@ -85,35 +85,36 @@ export const SPECIAL_EFFECTS = {
   WATER_DOMINION: 'water_dominion',
 
   // ## The Warrior character
-  THE_DULL_BLADE: 'the_dull_blade', // low self def (-80%), increment physAtk (+50%), crits chance (+30%), critDmg(+100%) and speed (+40%) for (3 turns)
-  THUNDER_ROAR: 'thunder_roar',     // Great lightning dmg and inflicts 50 stacks of paralyze (3 turns).
-  KENARIA_WILL: 'kenaria_will',    // Grant self survive with 1 hp one time and take 50% teamate damage (3 turns).
+  THE_DULL_BLADE: 'the_dull_blade',
+  KENARIAN_WILL: 'kenarian_will',    // Grant self survive with 1 hp one time and take 50% teamate damage (3 turns).
+  THUNDER_ROAR: 'thunder_roar',     //SKILL: Great lightning dmg and inflicts 50 stacks of paralyze (3 turns).
 
   // ## The Wizard character
-  UMBRA_FLICKER: 'umbra_flicker', // Extreme dark dmg, lower magDef (-15%) and dark resistance (-30%), consume all MP and block MP recover (3 turns), during this skill consume HP instead of MP.
-  DARK_LUMINA: 'dark_lumina', // Grant self capability to exploit all elemental weakpoints and double cast for 3 turn, during this skill consume HP instead of MP.
+  UMBRA_FLICKER: 'umbra_flicker', // SKILL: Extreme dark dmg, lower magDef (-15%) and dark resistance (-30%), consume all MP and block MP recover (3 turns), during this skill consume HP instead of MP.
+  BLACK_LUMINA: 'black_lumina', // Grant self capability to exploit all elemental weakpoints and double cast for 3 turn, during this skill consume HP instead of MP.
   WISSENVEIN_DEBT: 'wissenvein_debt', // Raise mag def (+50%), dark resistance (+50%) and speed (+30%) of the party (3 turns).
 
   // ## The Liberator character
-  DIVINE_FLAME: 'divine_flame',     // Cast skill to meditate, takes 6 turns to ready, on seventh turn: grant to all party members phys and mag Atk (+77%), and max hp (+77%), speed(+47%), crit chance(+177%), crit dmg (+57%), Heat Dmg (+177%) and Heat Resistance (+117%) (duration: rest of the battle). If her life falls below 20% HP while she's meditating, the skill cancels.
-  SOLEMN_DANCE: 'solemn_dance',     // Grant self phys and mag dodge (77%), and 17% dodge for all party (3 turns)
-  HONORI_WILL: 'honori_will',       // Grant self Heat dmg (+177%) and Heat Resistance (+117%) (3 turns) 
+  THE_SEVENTH_CYCLE: 'the_sevent_cycle', // Skill: Cast skill to meditate, takes 6 turns to ready, on seventh turn: Grant all party members "Divine Flame" .If her life falls below 20% MaxHP while she's meditating, the skill cancels.
+  DIVINE_FLAME: 'divine_flame',         // Increase phys and mag Atk (+177%), and max hp (+277%), speed(+57%), crit chance(+77%), crit dmg (+77%), Heat Dmg (+177%) and Heat Resistance (+77%) (duration: rest of the battle).
+  SOLEMN_DANCE: 'solemn_dance',         // Grant self phys and mag dodge (77%), and 17% dodge for all party (3 turns)
+  HONORIAN_WILL: 'honorian_will',       // Grant self Heat dmg (+177%) and Heat Resistance (+117%) (3 turns) 
 
   // ## The Scholar character
-  PERFECT_PLAN: 'perfect_plan',       // Raise to all party members beneficial effect duration by (9 turns) and remove perjudical effects by (2 turn).
+  PERFECT_PLAN: 'perfect_plan',       // Raise to all party members beneficial effect duration by (9 turns, max of 9 stack) and lower perjudical effects by (2 turn).
   REVERSE_CURE: 'reverse_cure',       // Lower to all foes the duration of the beneficial effects by (2 turns) and raise to all foes perjudical effects duration by (4 turn).
-  MEDICAL_SERVICE: 'medical_service', //Grant all party HP (15%)) recover and MP recover (15%) based on their max for (5 turn).
+  MEDICAL_SERVICE: 'medical_service', // Grant all party HP (15%)) recover and MP recover (15%) based on their max for (5 turn).
   RATIONAL_MIND: 'rational_mind',     // Increase Skill Efficiency of party skills by (40%) for (3 turns)
 
   // # Unique Skills for Bosses (special foes)
 
   // ## The Blazing Justice of Honori
-  BLAZING_JUSTICE: 'blazing_justice',           // Extreme fire dmg, and inflicts 150 stacks of burn to single target, exploit sword damage. (3 turns)
+  BLAZING_JUSTICE: 'blazing_justice',           // Skill: Extreme fire dmg, and inflicts 150 stacks of burn to single target, exploit sword damage. (3 turns)
   JUDGE_SENTENCE: 'judge_sentence',             // Counter phys Atk to single target with great heat dmg and inflicts 20 stacks of burn, exploit sword damage. (3 turns)
   FLAMES_OF_APOCALYPSE: 'flames_of_apocalypse', // Counter mag Atk with extreme heat dmg to all party, exploit sword damage. (3 turns) 
-  CRIMSOM_FLOWER: 'crimsom_flower',             // Inclicts all party members fire resistance(-60%) and inflicts 5 stack of burn every turn (5 turns) 
-  SEARING_SPIRE: 'searing_spire',               // Inclicts great heat dmg to random targets 3 times, chance (15%) for each hit to lower spear and sword resistance (-30%), exploit spear and sword resistance (3 turns)
-  ASHEN_GROUND: 'ashen_ground',                 // Lower speed (-60%) of all party and apply (40%) bleed. (3 turns)
+  CRIMSOM_FLOWER: 'crimsom_flower',             // Skill: Inclicts all party members fire resistance(-60%) and inflicts 5 stack of burn every turn (5 turns) 
+  SEARING_SPIRE: 'searing_spire',               // Skill Inclicts great heat dmg to random targets 3 times, chance (15%) for each hit to lower spear and sword resistance (-30%), exploit spear and sword resistance (3 turns)
+  ASHEN_GROUND: 'ashen_ground',                 // Lower speed (-60%) of all party members and apply burn 5 stack for each turn. (3 turns)
   ARTIFACT_LIMIT_BREAK: 'artifact_limit_break', // Revive one time with full HP. Raise maxHP (+150%), maxMP (+80%), phys and magic defence (+50%), speed (+70%), phys Atk (+50%), crit chance (+50%), crit dmg (+30%), Heat Dmg (+50%) and Heat Resistance (+100%) (duration: rest of the battle)
 
   // ## The Condemned of Wissenvein

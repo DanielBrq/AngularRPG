@@ -16,12 +16,12 @@ export const CharacterLabelType = {
     },
     LIBERATOR: {
         id: '01a03ba9-823c-758b-9995-f94c5c3e9638',
-        name: 'Arumi',
+        name: 'Kaeri',
         code_name: 'liberator',
     },
     SCHOLAR: {
         id: '01a03ba9-916d-76db-8340-15051c48d4ec',
-        name: 'Kaeri',
+        name: 'Meiri',
         code_name: 'scholar',
     }
 } as const;
