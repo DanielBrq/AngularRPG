@@ -1,4 +1,4 @@
-export const ELEMENTS = {
+export const ELEMENT = {
   HEAT: 'heat',
   COLD: 'cold',
   LIGHTNING: 'lightning',
@@ -6,4 +6,4 @@ export const ELEMENTS = {
   DARK: 'dark',
   LIGHT: 'light',
 } as const;
-export type ELEMENTS = (typeof ELEMENTS)[keyof typeof ELEMENTS];
+export type ElementType = (typeof ELEMENT)[keyof typeof ELEMENT];

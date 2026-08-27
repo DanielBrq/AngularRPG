@@ -1,12 +1,3 @@
-export const WEAPONS = {
-  SWORD: 'sword',
-  SPEAR: 'spear',
-  AXE: 'axe',
-  DAGGER: 'dagger',
-  GRIMOIRE: 'grimoire',
-} as const;
-export type WeaponsType = (typeof WEAPONS)[keyof typeof WEAPONS];
-
 export const EQUIPMENT = {
   HELMET: 'helmet',
   CHEST: 'chest',
