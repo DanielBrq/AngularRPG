@@ -39,6 +39,10 @@ export class Equipment extends Item {
         return this.name;
     }
 
+    public get isEquiped(): boolean {
+        return this.getEquipedBy !== undefined;
+    }
+
     private get getEquipedBy() {
         return this._equipedByCharacterId;
     }

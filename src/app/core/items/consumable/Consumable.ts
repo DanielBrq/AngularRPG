@@ -28,12 +28,12 @@ export class Consumable extends Item {
     }
 
     public set increaseAmount(amount: number) {
-        this._amount += clamp(0 + amount, 99);
+        this._amount = clamp(this._amount + amount, 99);
     }
 
     public set removeAmount(amount: number) {
-        if (this._amount >= 0) throw new Error("Cannot remove further");
-        this._amount -= clamp(0 - amount, 99);
+        if (this._amount < amount) throw new Error("Not enough amount");
+        this._amount -= amount;
     }
 }
 

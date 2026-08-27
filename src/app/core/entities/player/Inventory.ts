@@ -44,6 +44,7 @@ export class Inventory {
     }
 
     public set removeEquipment(equipment: Equipment) {
+        if (equipment.isEquiped) throw new Error("Cannot remove an equiped item");
         const index = this._equipment.findIndex(c => c.getId === equipment.getId);
         if (index === -1) throw new Error("Equipment not found");
         this._equipment.splice(index, 1);

@@ -3,6 +3,7 @@ import { Skill } from '@app/core/skills/';
 import { Equipment } from "@app/core";
 import { Effect } from "@app/core/effects/Effect";
 import { Inventory } from "@app/core/entities/player";
+import { EQUIPMENT, WEAPONS } from '@app/shared';
 
 export abstract class CharacterEntity extends GameEntity {
   constructor(
@@ -72,29 +73,39 @@ export abstract class CharacterEntity extends GameEntity {
   //#endregion
 
   public set setPlayerWeapon(weapon: Equipment) {
-    const req = this.getInventory.getEquipment(weapon);
-    req.setOwner = this._id;
-    if (this._weapon) this._weapon.removeOwner = this._id;
-    this._weapon = req
+    if (weapon.type === WEAPONS.SWORD || weapon.type === WEAPONS.SPEAR || weapon.type === WEAPONS.AXE ||
+      weapon.type === WEAPONS.DAGGER || weapon.type === WEAPONS.GRIMOIRE) {
+
+      const req = this.getInventory.getEquipment(weapon);
+      req.setOwner = this._id;
+      if (this._weapon) this._weapon.removeOwner = this._id;
+      this._weapon = req
+
+    } else { throw new Error("Equip Weapon only") }
   }
 
   public set setHelmet(equipment: Equipment) {
+    if (equipment.type != EQUIPMENT.HELMET) throw new Error("Equip helmet only");
     this._helmet = this.equipSlot(equipment, this._helmet)
   }
 
   public set setChest(equipment: Equipment) {
+    if (equipment.type != EQUIPMENT.CHEST) throw new Error("Equip chest only");
     this._chest = this.equipSlot(equipment, this._chest)
   }
 
   public set setRing(equipment: Equipment) {
+    if (equipment.type != EQUIPMENT.RING) throw new Error("Equip ring only");
     this._ring = this.equipSlot(equipment, this._ring)
   }
 
   public set setBelt(equipment: Equipment) {
+    if (equipment.type != EQUIPMENT.BELT) throw new Error("Equip belt only");
     this._belt = this.equipSlot(equipment, this._belt)
   }
 
   public set setBoots(equipment: Equipment) {
+    if (equipment.type != EQUIPMENT.BOOTS) throw new Error("Equip boots only");
     this._boots = this.equipSlot(equipment, this._boots)
   }
 
