@@ -1,8 +1,8 @@
 import { clamp } from '@app/shared/utils';
 import { BaseStats, CharacterEntity, FoeEntity, BattleStats } from "@app/core/entities";
 import { randomIntegerFromRange } from '@app/shared/utils/Randomizer';
-import { Skill } from '@app/core/battleSkills/Skill';
-import { Effect, EffectType } from "@app/core/effects/Effect";
+import { Skill } from '@app/core/skills';
+import { Effect } from "@app/core/effects/Effect";
 
 export type GameEntityType = CharacterEntity | FoeEntity
 
