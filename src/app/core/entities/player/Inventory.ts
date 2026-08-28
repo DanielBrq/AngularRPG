@@ -6,8 +6,6 @@ export class Inventory {
         private _equipment: Equipment[] = [],
     ) { }
 
-    //#region Consumables
-
     public getConsumableItem(consumable: Consumable): Consumable {
         const req = this._consumableItem.find(c => c.getId === consumable.getId);
         if (!req) throw new Error("Not found");
@@ -27,7 +25,6 @@ export class Inventory {
         if (index === undefined || index === -1) throw new Error("Consumable item not found");
         this._consumableItem?.splice(index, 1);
     }
-    //#endregion
 
     public getEquipment(equipment: Equipment): Equipment {
         const req = this._equipment.find(c => c.getId === equipment.getId);
