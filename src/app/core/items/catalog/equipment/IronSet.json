@@ -1,0 +1,71 @@
+﻿{
+    "ironHelm":  {
+                     "type":  "helmet",
+                     "stats":  {
+                                   "physDef":  0.04,
+                                   "magDef":  0.03
+                               }
+                 },
+    "ironChest":  {
+                      "type":  "chest",
+                      "stats":  {
+                                    "physDef":  0.05,
+                                    "magDef":  0.05
+                                }
+                  },
+    "ironRing":  {
+                     "type":  "ring",
+                     "stats":  {
+                                   "magAtk":  0.1
+                               }
+                 },
+    "ironBelt":  {
+                     "type":  "belt",
+                     "stats":  {
+                                   "mp":  0.05
+                               }
+                 },
+    "ironBoots":  {
+                      "type":  "boots",
+                      "stats":  {
+                                    "speed":  0.05
+                                }
+                  },
+    "ironSword":  {
+                      "type":  "sword",
+                      "stats":  {
+                                    "physAtk":  0.05,
+                                    "critChance":  0.01
+                                }
+                  },
+    "ironSpear":  {
+                      "type":  "spear",
+                      "stats":  {
+                                    "physAtk":  0.04,
+                                    "critDmg":  0.02
+                                }
+                  },
+    "ironDagger":  {
+                       "type":  "dagger",
+                       "stats":  {
+                                     "physAtk":  0.03,
+                                     "critChance":  0.04,
+                                     "critDmg":  0.03
+                                 }
+                   },
+    "ironAxe":  {
+                    "type":  "axe",
+                    "stats":  {
+                                  "physAtk":  0.05,
+                                  "critChance":  0.01
+                              }
+                },
+    "ironGrimoire":  {
+                         "type":  "grimoire",
+                         "stats":  {
+                                       "physAtk":  0.02,
+                                       "magAtk":  0.06,
+                                       "heatDmg":  0.05
+                                   }
+                     }
+}

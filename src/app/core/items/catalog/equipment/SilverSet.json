@@ -1,0 +1,71 @@
+﻿{
+    "silverHelm":  {
+                       "type":  "helmet",
+                       "stats":  {
+                                     "physDef":  0.05,
+                                     "magDef":  0.04
+                                 }
+                   },
+    "silverChest":  {
+                        "type":  "chest",
+                        "stats":  {
+                                      "physDef":  0.06,
+                                      "magDef":  0.06
+                                  }
+                    },
+    "silverRing":  {
+                       "type":  "ring",
+                       "stats":  {
+                                     "magAtk":  0.3
+                                 }
+                   },
+    "silverBelt":  {
+                       "type":  "belt",
+                       "stats":  {
+                                     "mp":  0.06
+                                 }
+                   },
+    "silverBoots":  {
+                        "type":  "boots",
+                        "stats":  {
+                                      "speed":  0.06
+                                  }
+                    },
+    "silverSword":  {
+                        "type":  "sword",
+                        "stats":  {
+                                      "physAtk":  0.06,
+                                      "critChance":  0.02
+                                  }
+                    },
+    "silverSpear":  {
+                        "type":  "spear",
+                        "stats":  {
+                                      "physAtk":  0.05,
+                                      "critDmg":  0.04
+                                  }
+                    },
+    "silverDagger":  {
+                         "type":  "dagger",
+                         "stats":  {
+                                       "physAtk":  0.05,
+                                       "critChance":  0.04,
+                                       "critDmg":  0.07
+                                   }
+                     },
+    "silverAxe":  {
+                      "type":  "axe",
+                      "stats":  {
+                                    "physAtk":  0.08,
+                                    "critChance":  0.01
+                                }
+                  },
+    "silverGrimoire":  {
+                           "type":  "grimoire",
+                           "stats":  {
+                                         "physAtk":  0.05,
+                                         "magAtk":  0.03,
+                                         "heatDmg":  0.06
+                                     }
+                       }
+}
