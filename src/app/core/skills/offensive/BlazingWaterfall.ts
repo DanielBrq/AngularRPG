@@ -1,7 +1,6 @@
 import { Skill } from '@app/core/skills/Skill';
 import { GameEntityType } from '@app/core/entities';
 import { SKILL } from '@app/shared/types';
-import { i18nTranslation } from '@app/shared/i18n/i18n';
 
 export class BlazingWaterfallSkill extends Skill {
   constructor(
@@ -24,7 +23,4 @@ export class BlazingWaterfallSkill extends Skill {
   }
 
   public override execute(): void { }
-
-  public getName(): string { return i18nTranslation('skills.offensive.common.blazingWaterfall.name', {}); }
-  public getDescription(): string { return i18nTranslation('skills.offensive.common.blazingWaterfall.description', {}); }
 }

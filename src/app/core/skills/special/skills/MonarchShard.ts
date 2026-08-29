@@ -1,7 +1,6 @@
 import { SpecialSkill } from '../SpecialSkill';
 import { CharacterEntity } from '@app/core/entities';
 import { CharacterLabelType } from '@app/shared/types';
-import { i18nTranslation } from '@app/shared/i18n/i18n';
 
 export class MonarchShard extends SpecialSkill {
     constructor(
@@ -86,17 +85,6 @@ export class MonarchShard extends SpecialSkill {
         this._target.getBattleStats.toxinResistance -= this._allStatsBonus;
         this._target.getBattleStats.darkResistance -= this._allStatsBonus;
         this._target.getBattleStats.lightResistance -= this._allStatsBonus;
-    }
-
-    public getName(): string {
-        return i18nTranslation('skills.special.monarchShard.name', {});
-    }
-
-    public getDescription(): string {
-        return i18nTranslation('skills.special.monarchShard.description', {
-            bonus: () => this._allStatsBonus * 100,
-            duration: () => this._duration,
-        });
     }
 
     private OwnerValidation(): boolean {

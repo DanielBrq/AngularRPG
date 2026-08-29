@@ -1,7 +1,6 @@
 import { Effect } from '@app/core/effects/Effect';
 import { STATUS_EFFECTS } from '@app/shared/types';
 import { GameEntityType } from '@app/core/entities';
-import { i18nTranslation } from '@app/shared/i18n/i18n';
 
 export class Frostbite extends Effect {
   constructor(
@@ -27,7 +26,4 @@ export class Frostbite extends Effect {
   }
 
   override expire(): void { }
-
-  public getName(): string { return i18nTranslation('effects.status.frostbite.name', {}); }
-  public getDescription(): string { return i18nTranslation('effects.status.frostbite.description', {}); }
 }

@@ -1,7 +1,6 @@
 import { Skill } from '@app/core/skills/Skill';
 import { GameEntityType } from '@app/core/entities';
 import { SKILL } from '@app/shared/types';
-import { i18nTranslation } from '@app/shared/i18n/i18n';
 
 export class HeavySliceSkill extends Skill {
   constructor(
@@ -28,7 +27,4 @@ export class HeavySliceSkill extends Skill {
     const dmg = Math.round(this._basePotency * target.getBattleStats.physAtk);
     target.takeDamage(-dmg);
   }
-
-  public getName(): string { return i18nTranslation('skills.offensive.common.heavySlice.name', {}); }
-  public getDescription(): string { return i18nTranslation('skills.offensive.common.heavySlice.description', {}); }
 }
