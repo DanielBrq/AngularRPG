@@ -1,8 +1,7 @@
 import { BaseStats, BuildStats, GameEntity, BattleStats, DamageWeaknessData } from "@app/core/entities/gameEntity";
 import { Skill } from '@app/core/skills/';
-import { Equipment } from "@app/core";
+import { Equipment } from "@app/core/items";
 import { Effect } from "@app/core/effects/Effect";
-import { Inventory } from "@app/core/entities/player";
 import { EQUIPMENT, WEAPONS } from '@app/shared';
 
 export abstract class CharacterEntity extends GameEntity {
@@ -15,7 +14,6 @@ export abstract class CharacterEntity extends GameEntity {
     battleStats: BattleStats,
     skills: Skill[] = [],
     effects: Effect[],
-    private inventory: Inventory,
     protected damageData: DamageWeaknessData,
     protected _buildStats: BuildStats,
     protected _currentExp: number = 0,
@@ -68,19 +66,15 @@ export abstract class CharacterEntity extends GameEntity {
     if (!this._weapon) throw new Error("There's not any Weapon equiped");
     return this._weapon
   }
-  public get getInventory() {
-    return this.inventory;
-  }
   //#endregion
 
   public set setPlayerWeapon(weapon: Equipment) {
     if (weapon.type === WEAPONS.SWORD || weapon.type === WEAPONS.SPEAR || weapon.type === WEAPONS.AXE ||
       weapon.type === WEAPONS.DAGGER || weapon.type === WEAPONS.GRIMOIRE) {
 
-      const req = this.getInventory.getEquipment(weapon);
-      req.setOwner = this._id;
+      weapon.setOwner = this._id;
       if (this._weapon) this._weapon.removeOwner = this._id;
-      this._weapon = req
+      this._weapon = weapon
 
     } else { throw new Error("Equip Weapon only") }
   }
@@ -118,10 +112,9 @@ export abstract class CharacterEntity extends GameEntity {
   }
 
   private equipSlot(equipment: Equipment, current?: Equipment): Equipment {
-    const req = this.getInventory.getEquipment(equipment);
-    req.setOwner = this._id;
+    equipment.setOwner = this._id;
     if (current) current.removeOwner = this._id;
-    return req;
+    return equipment;
   }
 
 }
