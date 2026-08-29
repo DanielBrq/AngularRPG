@@ -1,4 +1,5 @@
 import { BaseStats, GameEntity, BattleStats, DamageWeaknessData } from "@app/core/entities/gameEntity";
+import { DamageType } from "@app/shared";
 import { clamp } from "@app/shared/utils";
 
 export class FoeEntity extends GameEntity {
@@ -7,13 +8,14 @@ export class FoeEntity extends GameEntity {
     readonly name: string,
     isAlive: boolean = true,
     currentLvl: number,
+    baseStats: BaseStats,
+    battleStats: BattleStats,
+    protected _weakness: DamageType[],
     protected _maxPressurePoints: number = 100,
     protected _currentPressurePoints: number = 0,
     protected _pressureDamageReduction: number = 0.99,
     protected _presureBonusMultiplierDmg: number = 1,
     protected damageData: DamageWeaknessData,
-    baseStats: BaseStats,
-    battleStats: BattleStats,
   ) {
     super(
       id,
@@ -47,6 +49,26 @@ export class FoeEntity extends GameEntity {
     } else if (!this._isAlive) {
       throw new Error("The entity is already dead");
     }
+  }
+
+  private set Weakness(w: DamageType) {
+    if (this._weakness.find((e) => e === w)) throw new Error("The entity already has this weakness");
+    this._weakness.push(w)
+  }
+
+  private removeWeakness(w: DamageType) {
+    const index = this._weakness.indexOf(w);
+    if (index === -1) throw new Error("The entity does not have this weakness");
+    this._weakness.splice(index, 1);
+  }
+
+  public get getWeakness(): DamageType[] {
+    return this._weakness;
+  }
+
+  public hasWeakness(w: DamageType): boolean {
+    if (this._weakness.find((e) => e === w)) return true
+    return false
   }
 
   private updatePressureDamageReduction(): void {

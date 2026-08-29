@@ -1,9 +1,9 @@
-import { clamp } from '@app/shared/utils';
 import { BaseStats, CharacterEntity, FoeEntity, BattleStats, DamageWeaknessData } from "@app/core/entities";
-import { Randomizer } from '@app/shared/utils/Randomizer';
+import { Randomizer, clamp } from '@app/shared/utils';
 import { Skill } from '@app/core/skills';
 import { Effect } from "@app/core/effects/Effect";
 import { DamageCalculator } from '@app/core/combat';
+import { DamageType } from '@app/shared/types/';
 
 export type GameEntityType = CharacterEntity | FoeEntity
 
@@ -30,8 +30,6 @@ export abstract class GameEntity {
   public get isAlive(): boolean { return this._isAlive }
   //#endregion
 
-
-  // Setter
   public set setEntityEffects(incomingEffect: Effect) {
     const existingEffect = this._effects.find(e => e.getEffect === incomingEffect.getEffect);
     if (existingEffect) {
@@ -44,28 +42,24 @@ export abstract class GameEntity {
     }
   }
 
-  // Normal attack
-  protected attack(target: GameEntity): void {
-    // TODO: Handle how to show numbers in UI, maybe change void to custom return {}
-    const total: number = DamageCalculator.calculate(this, target)
+  protected attack(target: GameEntity, damageBasedOn: DamageType, skillMultiplier?: number): void {
+    const total: number = DamageCalculator.calcDmg(this, target, damageBasedOn, skillMultiplier,);
+    target.takeDamage(total);
 
-    target.takeDamage(1)// TODO: DMG calculator
+    // Clamp(totalDmg, dmgLimit)
   }
 
-  public attackRandomTarget(target: GameEntity[]): void {
-    // Character attacks random foe, or foe attacks random character
+  public attackRandomTarget(target: GameEntity[], damageBasedOn: DamageType, skillMultiplier?: number): void {
     const targetIndex = Randomizer.integerFromRange(0, target.length - 1);
-    this.attack(target[targetIndex]);
+    this.attack(target[targetIndex], damageBasedOn, skillMultiplier);
   }
 
-  public attackAll(target: GameEntity[]): void {
+  public attackAll(target: GameEntity[], damageBasedOn: DamageType, skillMultiplier?: number): void {
     // Character attacks group of foes, or foes attacks group of characterrs
-    target.forEach(entity => this.attack(entity));
+    target.forEach(entity => this.attack(entity, damageBasedOn, skillMultiplier));
   }
 
-  public get getDamageData(): DamageWeaknessData {
-    return this._damageData;
-  }
+  public get getDamageData(): DamageWeaknessData { return this._damageData }
 
   public takeDamage(incomingDmg: number): void {
     if (!this.isPositiveValue(incomingDmg)) throw new Error('Value must be positive');
