@@ -1,4 +1,4 @@
-﻿import { SpecialSkill } from '../SpecialSkill';
+import { SpecialSkill } from '../SpecialSkill';
 import { CharacterEntity } from '@app/core/entities';
 import { CharacterLabelType } from '@app/shared/types';
 import { i18nTranslation } from '@app/shared/i18n/i18n';
@@ -22,16 +22,16 @@ export class VulnerableShard extends SpecialSkill {
     public apply(): void {
         if (!this.OwnerValidation()) throw new Error('Vulnerable Shard can only be applied to the Survivor.');
 
-        this._target.battleStats.physDef -= this._physDefPenalty;
-        this._target.battleStats.magDef -= this._magDefPenalty;
-        this._target.battleStats.speed += this._speedBonus;
+        this._target.getBattleStats.physDef -= this._physDefPenalty;
+        this._target.getBattleStats.magDef -= this._magDefPenalty;
+        this._target.getBattleStats.speed += this._speedBonus;
     }
 
     public expire(): void {
         if (this._duration > 0) return;
-        this._target.battleStats.physDef += this._physDefPenalty;
-        this._target.battleStats.magDef += this._magDefPenalty;
-        this._target.battleStats.speed -= this._speedBonus;
+        this._target.getBattleStats.physDef += this._physDefPenalty;
+        this._target.getBattleStats.magDef += this._magDefPenalty;
+        this._target.getBattleStats.speed -= this._speedBonus;
     }
 
     private OwnerValidation(): boolean {

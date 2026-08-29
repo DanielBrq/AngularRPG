@@ -37,8 +37,8 @@ export class Poison extends Effect {
 
   private calculateDmg(target: GameEntityType): number {
     //TODO: refactor create and use DamageCalculator.ts instead of getting base stats
-    const mgaDmg: number = target.baseStats._magAtk * 0.25; //TODO: apply dmg calculator
-    const heatDmg: number = target.baseStats._toxinDmg ?? 1;
+    const mgaDmg: number = target.getBaseStats._magAtk * 0.25; //TODO: apply dmg calculator
+    const heatDmg: number = target.getBaseStats._toxinDmg ?? 1;
     const stackMultiplier: number = DamageCalculator.getStackMultiplier(this._stack);
     return mgaDmg * stackMultiplier * heatDmg;
   }

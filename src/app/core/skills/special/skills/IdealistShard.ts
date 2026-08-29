@@ -1,4 +1,4 @@
-﻿import { SpecialSkill } from '../SpecialSkill';
+import { SpecialSkill } from '../SpecialSkill';
 import { CharacterEntity } from '@app/core/entities';
 import { i18nTranslation } from '@app/shared/i18n/i18n';
 
@@ -34,18 +34,18 @@ export class IdealistShard extends SpecialSkill {
 
     public apply(): void {
         if (this._isSelfTarget) {
-            this._target.battleStats.physAtk -= this._physAtkPenalty;
-            this._target.battleStats.magAtk -= this._magAtkPenalty;
+            this._target.getBattleStats.physAtk -= this._physAtkPenalty;
+            this._target.getBattleStats.magAtk -= this._magAtkPenalty;
         }
-        this._target.battleStats.speed += this._speedBonus;
+        this._target.getBattleStats.speed += this._speedBonus;
     }
 
     public expire(): void {
         if (this._duration > 0) return;
         if (this._isSelfTarget) {
-            this._target.battleStats.physAtk += this._physAtkPenalty;
-            this._target.battleStats.magAtk += this._magAtkPenalty;
+            this._target.getBattleStats.physAtk += this._physAtkPenalty;
+            this._target.getBattleStats.magAtk += this._magAtkPenalty;
         }
-        this._target.battleStats.speed -= this._speedBonus;
+        this._target.getBattleStats.speed -= this._speedBonus;
     }
 }

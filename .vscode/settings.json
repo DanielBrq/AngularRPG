@@ -1,5 +1,5 @@
 {
-  "workbench.iconTheme": "material-icon-theme",
+  "workbench.iconTheme": "charmed-soft",
   "material-icon-theme.folders.associations": {
     "combat": "controller",
     "entities": "class",

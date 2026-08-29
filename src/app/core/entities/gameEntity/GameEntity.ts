@@ -1,8 +1,9 @@
 import { clamp } from '@app/shared/utils';
-import { BaseStats, CharacterEntity, FoeEntity, BattleStats } from "@app/core/entities";
-import { randomIntegerFromRange } from '@app/shared/utils/Randomizer';
+import { BaseStats, CharacterEntity, FoeEntity, BattleStats, DamageWeaknessData } from "@app/core/entities";
+import { Randomizer } from '@app/shared/utils/Randomizer';
 import { Skill } from '@app/core/skills';
 import { Effect } from "@app/core/effects/Effect";
+import { DamageCalculator } from '@app/core/combat';
 
 export type GameEntityType = CharacterEntity | FoeEntity
 
@@ -16,17 +17,17 @@ export abstract class GameEntity {
     protected _baseStats: BaseStats,
     protected _battleStats: BattleStats,
 
-    protected skills: Skill[] = [],
+    protected _skills: Skill[] = [],
     protected _effects: Effect[],
-
+    protected _damageData: DamageWeaknessData
   ) { }
 
   //#region getters
-  public get getId() { return this._id }
-  public get baseStats(): BaseStats { return this._baseStats }
-  public get battleStats(): BattleStats { return this._battleStats }
-  public get setEntityEffects(): Effect[] { return this._effects }
-  public get isAlive() { return this._isAlive }
+  public get getId(): string { return this._id }
+  public get getBaseStats(): BaseStats { return this._baseStats }
+  public get getBattleStats(): BattleStats { return this._battleStats }
+  public get getEntityEffects(): Effect[] { return this._effects }
+  public get isAlive(): boolean { return this._isAlive }
   //#endregion
 
 
@@ -43,22 +44,31 @@ export abstract class GameEntity {
     }
   }
 
-  // Actions
+  // Normal attack
   protected attack(target: GameEntity): void {
+    // TODO: Handle how to show numbers in UI, maybe change void to custom return {}
+    const total: number = DamageCalculator.calculate(this, target)
+
     target.takeDamage(1)// TODO: DMG calculator
   }
 
-  private attackRandomTarget(target: GameEntity[]): void {
-    const targetIndex = randomIntegerFromRange(0, target.length - 1);
+  public attackRandomTarget(target: GameEntity[]): void {
+    // Character attacks random foe, or foe attacks random character
+    const targetIndex = Randomizer.integerFromRange(0, target.length - 1);
     this.attack(target[targetIndex]);
   }
 
-  private attackAll(target: GameEntity[]): void {
+  public attackAll(target: GameEntity[]): void {
+    // Character attacks group of foes, or foes attacks group of characterrs
     target.forEach(entity => this.attack(entity));
   }
 
+  public get getDamageData(): DamageWeaknessData {
+    return this._damageData;
+  }
+
   public takeDamage(incomingDmg: number): void {
-    if (this.isPositiveValue(incomingDmg)) throw new Error('Value must be negative');
+    if (!this.isPositiveValue(incomingDmg)) throw new Error('Value must be positive');
 
     if (this._isAlive && incomingDmg >= this._battleStats.hp) {
       this._isAlive = false;
@@ -70,7 +80,7 @@ export abstract class GameEntity {
   public hpRecover(amount: number): void {
     if (!this.isPositiveValue(amount)) throw new Error('Value must be positive');
     if (this._isAlive) {
-      this.battleStats.hp = clamp(this._battleStats.hp + amount, this._battleStats.maxHp);
+      this.getBattleStats.hp = clamp(this._battleStats.hp + amount, this._battleStats.maxHp);
     }
   }
 
@@ -81,7 +91,7 @@ export abstract class GameEntity {
   // Validators
   protected hasEnoughMP(cost: number): boolean { return this._battleStats.mp >= cost }
 
-  private isPositiveValue(amount: number): boolean { return (amount > 0) }
+  protected isPositiveValue(amount: number): boolean { return (amount > 0) }
 
 
 }

@@ -1,4 +1,4 @@
-﻿import { SpecialSkill } from '../SpecialSkill';
+import { SpecialSkill } from '../SpecialSkill';
 import { CharacterEntity } from '@app/core/entities';
 import { CharacterLabelType } from '@app/shared/types';
 import { i18nTranslation } from '@app/shared/i18n/i18n';
@@ -20,12 +20,12 @@ export class MercylessShard extends SpecialSkill {
     public apply(): void {
         if (!this.OwnerValidation()) throw new Error('Mercyless Shard can only be applied to the Survivor.');
 
-        this._target.battleStats.physAtk += this._physAtkBonus;
+        this._target.getBattleStats.physAtk += this._physAtkBonus;
     }
 
     public expire(): void {
         if (this._duration > 0) return;
-        this._target.battleStats.physAtk -= this._physAtkBonus;
+        this._target.getBattleStats.physAtk -= this._physAtkBonus;
     }
 
     private OwnerValidation(): boolean {

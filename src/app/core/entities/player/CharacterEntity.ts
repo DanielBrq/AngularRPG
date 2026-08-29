@@ -1,4 +1,4 @@
-import { BaseStats, BuildStats, GameEntity, BattleStats } from "@app/core/entities/gameEntity";
+import { BaseStats, BuildStats, GameEntity, BattleStats, DamageWeaknessData } from "@app/core/entities/gameEntity";
 import { Skill } from '@app/core/skills/';
 import { Equipment } from "@app/core";
 import { Effect } from "@app/core/effects/Effect";
@@ -16,7 +16,7 @@ export abstract class CharacterEntity extends GameEntity {
     skills: Skill[] = [],
     effects: Effect[],
     private inventory: Inventory,
-
+    protected damageData: DamageWeaknessData,
     protected _buildStats: BuildStats,
     protected _currentExp: number = 0,
     protected _expToNextLevel: number = 0,
@@ -37,6 +37,7 @@ export abstract class CharacterEntity extends GameEntity {
       battleStats,
       skills,
       effects,
+      damageData,
     )
   }
 

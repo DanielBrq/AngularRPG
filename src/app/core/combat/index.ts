@@ -1,2 +1,2 @@
-export * from './BattleSystem';
+export * from './BattleTurnsSystem';
 export * from './DamageCalculator';

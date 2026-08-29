@@ -1,4 +1,4 @@
-﻿import { SpecialSkill } from '../SpecialSkill';
+import { SpecialSkill } from '../SpecialSkill';
 import { CharacterEntity } from '@app/core/entities';
 import { CharacterLabelType } from '@app/shared/types';
 import { i18nTranslation } from '@app/shared/i18n/i18n';
@@ -27,18 +27,18 @@ export class WaterDominion extends SpecialSkill {
 
     public apply(): void {
         if (!this.OwnerValidation()) throw new Error('Survival Instinct can only be applied to the Survivor.');
-        this._target.battleStats.coldDmg += this._coldDmgBonus;
-        this._target.battleStats.heatResistance += this._heatResistanceBonus;
+        this._target.getBattleStats.coldDmg += this._coldDmgBonus;
+        this._target.getBattleStats.heatResistance += this._heatResistanceBonus;
 
         //save speed bouns, avoid miss calc if speed changes during duration
         this._speedBonus = this.getSpeedBonus();
-        this._target.battleStats.physAtk += this._speedBonus;
+        this._target.getBattleStats.physAtk += this._speedBonus;
     }
 
     public expire(): void {
-        this._target.battleStats.coldDmg -= this._coldDmgBonus;
-        this._target.battleStats.heatResistance -= this._heatResistanceBonus;
-        this._target.battleStats.physAtk -= this._speedBonus;
+        this._target.getBattleStats.coldDmg -= this._coldDmgBonus;
+        this._target.getBattleStats.heatResistance -= this._heatResistanceBonus;
+        this._target.getBattleStats.physAtk -= this._speedBonus;
     }
 
     private OwnerValidation(): boolean {
@@ -46,7 +46,7 @@ export class WaterDominion extends SpecialSkill {
     }
 
     private getSpeedBonus(): number {
-        return Math.floor(this._target.battleStats.speed / 100) * 0.12;
+        return Math.floor(this._target.getBattleStats.speed / 100) * 0.12;
     }
     public getName(): string { return i18nTranslation('skills.special.waterDominion.name', {}); }
     public getDescription(): string { return i18nTranslation('skills.special.waterDominion.description', { coldDmg: () => this._coldDmgBonus * 100, heatResistance: () => this._heatResistanceBonus * 100, speedBonus: () => this._speedBonus * 100, duration: () => this._duration }); }
