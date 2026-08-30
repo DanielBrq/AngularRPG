@@ -1,4 +1,4 @@
-import { CharacterEntity } from "@app/core/entities/player";
+import { Equipment } from "@app/core/items";
 
 /* Extra Stats comming from
 team composition buffs, equipment: Items, Weapons and Armor. (static values, no realtime)*/
@@ -43,19 +43,12 @@ export class BuildStats {
         public lightResistance: number = 0,
     ) { }
 
-    static build(c: CharacterEntity): BuildStats {
+    static build(equipment: (Equipment | undefined)[] = []): BuildStats {
         const stats = new BuildStats();
 
-        const equipment = [
-            c.helmet,
-            c.chest,
-            c.ring,
-            c.belt,
-            c.boots,
-            c.weapon
-        ];
-
         for (const item of equipment) {
+            if (!item || !item.itemStats) continue;
+
             stats.maxHp += item.itemStats._maxHp;
             stats.speed += item.itemStats._speed;
             stats.physAtk += item.itemStats._physAtk;

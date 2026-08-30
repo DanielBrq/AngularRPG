@@ -1,6 +1,6 @@
 import { SpecialSkill } from '../SpecialSkill';
 import { CharacterEntity } from '@app/core/entities';
-import { CharacterLabelType } from '@app/shared/types';
+import { CharactersMetadata } from '@app/shared/types';
 
 export class VulnerableShard extends SpecialSkill {
     constructor(
@@ -34,6 +34,6 @@ export class VulnerableShard extends SpecialSkill {
     }
 
     private OwnerValidation(): boolean {
-        return this._target.id === CharacterLabelType.SURVIVOR.id;
+        return this._target.id === CharactersMetadata.SURVIVOR.id;
     }
 }

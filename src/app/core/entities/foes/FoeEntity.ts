@@ -1,4 +1,5 @@
 import { BaseStats, GameEntity, BattleStats, DamageWeaknessData } from "@app/core/entities/gameEntity";
+import { Skill } from "@app/core/skills";
 import { DamageType } from "@app/shared";
 import { clamp, assertPositive } from "@app/shared/utils";
 
@@ -10,8 +11,9 @@ export class FoeEntity extends GameEntity {
     currentLvl: number,
     baseStats: BaseStats,
     battleStats: BattleStats,
+    skills: Skill[] = [],
     protected _weakness: DamageType[],
-    protected _maxPressurePoints: number = 100,
+    protected readonly _maxPressurePoints: number = 100,
     protected _currentPressurePoints: number = 0,
     protected _pressureDamageReduction: number = 0.99,
     protected _presureBonusMultiplierDmg: number = 1,
@@ -24,7 +26,7 @@ export class FoeEntity extends GameEntity {
       currentLvl,
       baseStats,
       battleStats,
-      [],
+      skills,
       [],
       damageData,
     )

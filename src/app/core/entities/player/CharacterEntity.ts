@@ -4,7 +4,7 @@ import { Equipment } from "@app/core/items";
 import { Effect } from "@app/core/effects/Effect";
 import { EQUIPMENT, WEAPONS } from '@app/shared';
 
-export abstract class CharacterEntity extends GameEntity {
+export class CharacterEntity extends GameEntity {
   constructor(
     readonly id: string,
     readonly name: string,
@@ -13,18 +13,15 @@ export abstract class CharacterEntity extends GameEntity {
     baseStats: BaseStats,
     battleStats: BattleStats,
     skills: Skill[] = [],
-    effects: Effect[],
-    protected damageData: DamageWeaknessData,
-    protected _buildStats: BuildStats,
-    protected _currentExp: number = 0,
-    protected _expToNextLevel: number = 0,
-    protected _weapon?: Equipment,
-    protected _helmet?: Equipment,
-    protected _chest?: Equipment,
-    protected _ring?: Equipment,
-    protected _belt?: Equipment,
-    protected _boots?: Equipment,
-
+    effects: Effect[] = [],
+    damageData: DamageWeaknessData,
+    private _buildStats: BuildStats,
+    private _weapon?: Equipment,
+    private _helmet?: Equipment,
+    private _chest?: Equipment,
+    private _ring?: Equipment,
+    private _belt?: Equipment,
+    private _boots?: Equipment,
   ) {
     super(
       id,

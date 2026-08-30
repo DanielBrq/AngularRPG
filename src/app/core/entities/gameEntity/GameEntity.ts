@@ -19,7 +19,7 @@ export abstract class GameEntity {
     protected _battleStats: BattleStats,
 
     protected _skills: Skill[] = [],
-    protected _effects: Effect[],
+    protected _effects: Effect[] = [],
     protected _damageData: DamageWeaknessData
   ) { }
 
@@ -44,7 +44,7 @@ export abstract class GameEntity {
   }
 
   protected attack(target: GameEntity, damageBasedOn: DamageType, skillMultiplier?: number): void {
-    const result: { damage, criticalTier, exploitedWeakness } = DamageCalculator.calcDmg(this, target, damageBasedOn, skillMultiplier,);
+    const result: { damage: number, criticalTier: number, exploitedWeakness: DamageType[] } = DamageCalculator.calcDmg(this, target, damageBasedOn, skillMultiplier,);
 
     // TODO: publish result on event to show it in HUD
 

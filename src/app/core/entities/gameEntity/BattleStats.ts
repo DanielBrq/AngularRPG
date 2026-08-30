@@ -39,11 +39,11 @@ export class BattleStats {
         public lightResistance: number = 0,
     ) { }
 
-    public calculate(baseStats: BaseStats): BattleStats;
+    public static calculate(baseStats: BaseStats): BattleStats;
 
-    public calculate(baseStats: BaseStats, buildStats: BuildStats): BattleStats;
+    public static calculate(baseStats: BaseStats, buildStats: BuildStats): BattleStats;
 
-    public calculate(baseStats: BaseStats, buildStats?: BuildStats,): BattleStats {
+    public static calculate(baseStats: BaseStats, buildStats?: BuildStats): BattleStats {
         const initBattleStats: BattleStats = new BattleStats(
             baseStats._maxHp,
             baseStats._maxHp,
@@ -55,7 +55,7 @@ export class BattleStats {
             baseStats._magAtk,
             baseStats._magDef,
             baseStats._maxMp,
-            baseStats._mp,
+            baseStats._maxMp,
             baseStats._swordDmg,
             baseStats._spearDmg,
             baseStats._axeDmg,
@@ -117,4 +117,5 @@ export class BattleStats {
         return initBattleStats;
     }
 
+    public static build = BattleStats.calculate;
 }

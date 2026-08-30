@@ -59,7 +59,7 @@ export class DamageCalculator {
         break;
     }
 
-    // Prevent inmunity, deals / takes at least 10% of damage.
+    // Prevent inmunity, deals at least 10% of damage.
     damageMultiplier = Math.max(damageMultiplier, this.MIN_DAMAGE_MULTIPLIER);
 
     // When target is a Foe. Get weaknesses from the FoeEntity.
