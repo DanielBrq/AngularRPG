@@ -37,5 +37,7 @@ export class ItemStats {
         public readonly _toxinResistance: number = 0,
         public readonly _darkResistance: number = 0,
         public readonly _lightResistance: number = 0,
+
+        public readonly _dmgLimit: number = 0,
     ) { }
 }

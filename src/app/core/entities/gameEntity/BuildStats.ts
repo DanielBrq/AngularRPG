@@ -41,6 +41,8 @@ export class BuildStats {
         public toxinResistance: number = 0,
         public darkResistance: number = 0,
         public lightResistance: number = 0,
+
+        public dmgLimit: number = 0,
     ) { }
 
     static build(equipment: (Equipment | undefined)[] = []): BuildStats {
@@ -79,6 +81,7 @@ export class BuildStats {
             stats.toxinResistance += item.itemStats._toxinResistance;
             stats.darkResistance += item.itemStats._darkResistance;
             stats.lightResistance += item.itemStats._lightResistance;
+            stats.dmgLimit += item.itemStats._dmgLimit;
         }
         return stats;
     }

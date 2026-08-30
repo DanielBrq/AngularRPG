@@ -37,6 +37,8 @@ export class BattleStats {
         public toxinResistance: number = 0,
         public darkResistance: number = 0,
         public lightResistance: number = 0,
+
+        public dmgLimit: number = 99999,
     ) { }
 
     public static calculate(baseStats: BaseStats): BattleStats;
@@ -107,6 +109,7 @@ export class BattleStats {
             initBattleStats.toxinResistance *= buildStats.toxinResistance;
             initBattleStats.darkResistance *= buildStats.darkResistance;
             initBattleStats.lightResistance *= buildStats.lightResistance;
+            initBattleStats.dmgLimit += buildStats.dmgLimit;
         }
 
         // Fill hp and mg to top

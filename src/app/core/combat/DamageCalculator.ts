@@ -85,6 +85,9 @@ export class DamageCalculator {
     // Apply critical damage
     damage *= critDamage;
 
+    // Apply damage limit
+    damage = clamp(damage, target.getBattleStats.dmgLimit);
+
     return { damage, criticalTier, exploitedWeakness }
   }
 
