@@ -1,9 +1,10 @@
 import { BaseStats, CharacterEntity, FoeEntity, BattleStats, DamageWeaknessData } from "@app/core/entities";
-import { Randomizer, clamp } from '@app/shared/utils';
+import { Randomizer, assertPositive, clamp } from '@app/shared/utils';
 import { Skill } from '@app/core/skills';
 import { Effect } from "@app/core/effects/Effect";
 import { DamageCalculator } from '@app/core/combat';
-import { DamageType } from '@app/shared/types/';
+import { DamageType, ELEMENTAL_DAMAGE, PHYSICAL_DAMAGE } from '@app/shared/types/';
+
 
 export type GameEntityType = CharacterEntity | FoeEntity
 
@@ -43,10 +44,13 @@ export abstract class GameEntity {
   }
 
   protected attack(target: GameEntity, damageBasedOn: DamageType, skillMultiplier?: number): void {
-    const total: number = DamageCalculator.calcDmg(this, target, damageBasedOn, skillMultiplier,);
-    target.takeDamage(total);
+    const result: { damage, criticalTier, exploitedWeakness } = DamageCalculator.calcDmg(this, target, damageBasedOn, skillMultiplier,);
 
-    // Clamp(totalDmg, dmgLimit)
+    // TODO: publish result on event to show it in HUD
+
+    target.takeDamage(result.damage);
+
+    // TODO: Clamp(totalDmg, dmgLimit) - implement dmg limit feature
   }
 
   public attackRandomTarget(target: GameEntity[], damageBasedOn: DamageType, skillMultiplier?: number): void {
@@ -62,7 +66,7 @@ export abstract class GameEntity {
   public get getDamageData(): DamageWeaknessData { return this._damageData }
 
   public takeDamage(incomingDmg: number): void {
-    if (!this.isPositiveValue(incomingDmg)) throw new Error('Value must be positive');
+    assertPositive(incomingDmg);
 
     if (this._isAlive && incomingDmg >= this._battleStats.hp) {
       this._isAlive = false;
@@ -72,20 +76,235 @@ export abstract class GameEntity {
   }
 
   public hpRecover(amount: number): void {
-    if (!this.isPositiveValue(amount)) throw new Error('Value must be positive');
+    assertPositive(amount);
     if (this._isAlive) {
       this.getBattleStats.hp = clamp(this._battleStats.hp + amount, this._battleStats.maxHp);
     }
   }
 
   public mpRecover(amount: number): void {
-    if (this._isAlive && !this.isPositiveValue(amount)) throw new Error('Value must be positive');
+    if (this._isAlive) assertPositive(amount);
   }
 
   // Validators
   protected hasEnoughMP(cost: number): boolean { return this._battleStats.mp >= cost }
 
-  protected isPositiveValue(amount: number): boolean { return (amount > 0) }
+  public addPhysAtk(value: number): void {
+    assertPositive(value);
+    this._battleStats.physAtk += value;
+  }
 
+  public lowerPhysAtk(value: number): void {
+    assertPositive(value);
+    this._battleStats.physAtk -= value;
+  }
+
+  public addMagAtk(value: number): void {
+    assertPositive(value);
+    this._battleStats.magAtk += value;
+  }
+
+  public lowerMagAtk(value: number): void {
+    assertPositive(value);
+    this._battleStats.magAtk -= value;
+  }
+
+  public addResistance(value: number, resistanceType: DamageType): void {
+    assertPositive(value);
+    switch (resistanceType) {
+      case ELEMENTAL_DAMAGE.HEAT: {
+        this._battleStats.heatResistance += value;
+        break;
+      }
+      case ELEMENTAL_DAMAGE.COLD: {
+        this._battleStats.coldResistance += value;
+        break;
+      }
+      case ELEMENTAL_DAMAGE.LIGHTNING: {
+        this._battleStats.lightningResistance += value;
+        break;
+      }
+      case ELEMENTAL_DAMAGE.TOXIN: {
+        this._battleStats.toxinResistance += value;
+        break;
+      }
+      case ELEMENTAL_DAMAGE.DARK: {
+        this._battleStats.darkResistance += value;
+        break;
+      }
+      case ELEMENTAL_DAMAGE.LIGHT: {
+        this._battleStats.lightResistance -= value;
+        break;
+      }
+      case PHYSICAL_DAMAGE.SWORD: {
+        this._battleStats.swordResistance += value;
+        break;
+      }
+      case PHYSICAL_DAMAGE.SPEAR: {
+        this._battleStats.spearResistance += value;
+        break;
+      }
+      case PHYSICAL_DAMAGE.AXE: {
+        this._battleStats.axeResistance += value;
+        break;
+      }
+      case PHYSICAL_DAMAGE.DAGGER: {
+        this._battleStats.daggerResistance += value;
+        break;
+      }
+      default: {
+        throw new Error('Invalid resistance type');
+      }
+    }
+
+  }
+
+  public addDamageType(value: number, damageType: DamageType): void {
+    assertPositive(value);
+    switch (damageType) {
+      case ELEMENTAL_DAMAGE.HEAT: {
+        this._battleStats.heatDmg += value;
+        break;
+      }
+      case ELEMENTAL_DAMAGE.COLD: {
+        this._battleStats.coldDmg += value;
+        break;
+      }
+      case ELEMENTAL_DAMAGE.LIGHTNING: {
+        this._battleStats.lightningDmg += value;
+        break;
+      }
+      case ELEMENTAL_DAMAGE.TOXIN: {
+        this._battleStats.toxinDmg += value;
+        break;
+      }
+      case ELEMENTAL_DAMAGE.DARK: {
+        this._battleStats.darkDmg += value;
+        break;
+      }
+      case ELEMENTAL_DAMAGE.LIGHT: {
+        this._battleStats.lightDmg -= value;
+        break;
+      }
+      case PHYSICAL_DAMAGE.SWORD: {
+        this._battleStats.swordDmg += value;
+        break;
+      }
+      case PHYSICAL_DAMAGE.SPEAR: {
+        this._battleStats.spearDmg += value;
+        break;
+      }
+      case PHYSICAL_DAMAGE.AXE: {
+        this._battleStats.axeDmg += value;
+        break;
+      }
+      case PHYSICAL_DAMAGE.DAGGER: {
+        this._battleStats.daggerDmg += value;
+        break;
+      }
+      default: {
+        throw new Error('Invalid resistance type');
+      }
+    }
+  }
+
+  public removeResistance(value: number, resistanceType: DamageType): void {
+    assertPositive(value);
+    switch (resistanceType) {
+      case ELEMENTAL_DAMAGE.HEAT: {
+        this._battleStats.heatResistance -= value;
+        break;
+      }
+      case ELEMENTAL_DAMAGE.COLD: {
+        this._battleStats.coldResistance -= value;
+        break;
+      }
+      case ELEMENTAL_DAMAGE.LIGHTNING: {
+        this._battleStats.lightningResistance -= value;
+        break;
+      }
+      case ELEMENTAL_DAMAGE.TOXIN: {
+        this._battleStats.toxinResistance -= value;
+        break;
+      }
+      case ELEMENTAL_DAMAGE.DARK: {
+        this._battleStats.darkResistance -= value;
+        break;
+      }
+      case ELEMENTAL_DAMAGE.LIGHT: {
+        this._battleStats.lightResistance -= value;
+        break;
+      }
+      case PHYSICAL_DAMAGE.SWORD: {
+        this._battleStats.swordResistance -= value;
+        break;
+      }
+      case PHYSICAL_DAMAGE.SPEAR: {
+        this._battleStats.spearResistance -= value;
+        break;
+      }
+      case PHYSICAL_DAMAGE.AXE: {
+        this._battleStats.axeResistance -= value;
+        break;
+      }
+      case PHYSICAL_DAMAGE.DAGGER: {
+        this._battleStats.daggerResistance -= value;
+        break;
+      }
+      default: {
+        throw new Error('Invalid resistance type');
+      }
+    }
+
+  }
+
+  public removeDamageType(value: number, damageType: DamageType): void {
+    assertPositive(value);
+    switch (damageType) {
+      case ELEMENTAL_DAMAGE.HEAT: {
+        this._battleStats.heatDmg -= value;
+        break;
+      }
+      case ELEMENTAL_DAMAGE.COLD: {
+        this._battleStats.coldDmg -= value;
+        break;
+      }
+      case ELEMENTAL_DAMAGE.LIGHTNING: {
+        this._battleStats.lightningDmg -= value;
+        break;
+      }
+      case ELEMENTAL_DAMAGE.TOXIN: {
+        this._battleStats.toxinDmg -= value;
+        break;
+      }
+      case ELEMENTAL_DAMAGE.DARK: {
+        this._battleStats.darkDmg -= value;
+        break;
+      }
+      case ELEMENTAL_DAMAGE.LIGHT: {
+        this._battleStats.lightDmg -= value;
+        break;
+      }
+      case PHYSICAL_DAMAGE.SWORD: {
+        this._battleStats.swordDmg -= value;
+        break;
+      }
+      case PHYSICAL_DAMAGE.SPEAR: {
+        this._battleStats.spearDmg -= value;
+        break;
+      }
+      case PHYSICAL_DAMAGE.AXE: {
+        this._battleStats.axeDmg -= value;
+        break;
+      }
+      case PHYSICAL_DAMAGE.DAGGER: {
+        this._battleStats.daggerDmg -= value;
+        break;
+      }
+      default: {
+        throw new Error('Invalid resistance type');
+      }
+    }
+  }
 
 }

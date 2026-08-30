@@ -1,70 +1,91 @@
 import { DamageType, ELEMENTAL_DAMAGE, PHYSICAL_DAMAGE } from '@app/shared/types/';
 import { Randomizer } from '@app/shared/utils/Randomizer';
 import { BattleStats, FoeEntity, GameEntity } from '@app/core/entities';
+import { clamp } from '@app/shared';
 
 export class DamageCalculator {
+  private static readonly MIN_DAMAGE_MULTIPLIER = 0.1;
 
   public static calcDmg(
     attacker: GameEntity,
     target: GameEntity,
     damageBasedOn: DamageType,    // Come from skill.
     skillMultiplier: number = 1,  // Come from skill
-  ): number {
-    let damage: number;
-    let damageMultiplier: number = 1;
-    let targetWeaknesses: DamageType[] = [];
-    const attackerExploitable: DamageType[] = attacker.getDamageData.exploitableWeaknesses;
+  ): { damage: number, criticalTier: number, exploitedWeakness: DamageType[] } {
 
-    //Problema se usan porcentajes por 0.x y se setean en 0 sumando buffs en 0.x decimales pero en el 
-    // switch de abajo si no hay buff de arma, se multiplicará por 0 y eso le quitará
+    const isPhysical = (Object.values(PHYSICAL_DAMAGE) as readonly DamageType[]).includes(damageBasedOn);
+
+    let damage = this.resolveAttackAgainstDefense(
+      isPhysical
+        ? attacker.getBattleStats.physAtk
+        : attacker.getBattleStats.magAtk,
+      isPhysical
+        ? target.getBattleStats.physDef
+        : target.getBattleStats.magDef
+    );
+
+    let damageMultiplier: number = 1;
+
     switch (damageBasedOn) {
       case PHYSICAL_DAMAGE.SWORD:
-        damageMultiplier += attacker.getBattleStats.physAtk * attacker.getBattleStats.swordDmg;
+        damageMultiplier += this.resolveDmgTypeAgainstDefType(attacker.getBattleStats.swordDmg, target.getBattleStats.swordResistance);
         break;
       case PHYSICAL_DAMAGE.SPEAR:
-        damageMultiplier += attacker.getBattleStats.physAtk * attacker.getBattleStats.spearDmg;
+        damageMultiplier += this.resolveDmgTypeAgainstDefType(attacker.getBattleStats.spearDmg, target.getBattleStats.spearResistance);
         break;
       case PHYSICAL_DAMAGE.AXE:
-        damageMultiplier += attacker.getBattleStats.physAtk * attacker.getBattleStats.axeDmg;
+        damageMultiplier += this.resolveDmgTypeAgainstDefType(attacker.getBattleStats.axeDmg, target.getBattleStats.axeResistance);
         break;
       case PHYSICAL_DAMAGE.DAGGER:
-        damageMultiplier += attacker.getBattleStats.physAtk * attacker.getBattleStats.daggerDmg;
+        damageMultiplier += this.resolveDmgTypeAgainstDefType(attacker.getBattleStats.daggerDmg, target.getBattleStats.daggerResistance);
         break;
       case ELEMENTAL_DAMAGE.HEAT:
-        damageMultiplier += attacker.getBattleStats.magAtk * attacker.getBattleStats.heatDmg;
+        damageMultiplier += this.resolveDmgTypeAgainstDefType(attacker.getBattleStats.heatDmg, target.getBattleStats.heatResistance);
         break;
       case ELEMENTAL_DAMAGE.COLD:
-        damageMultiplier += attacker.getBattleStats.magAtk * attacker.getBattleStats.coldDmg;
+        damageMultiplier += this.resolveDmgTypeAgainstDefType(attacker.getBattleStats.coldDmg, target.getBattleStats.coldResistance);
         break;
       case ELEMENTAL_DAMAGE.LIGHTNING:
-        damageMultiplier += attacker.getBattleStats.magAtk * attacker.getBattleStats.lightningDmg;
+        damageMultiplier += this.resolveDmgTypeAgainstDefType(attacker.getBattleStats.lightningDmg, target.getBattleStats.lightningResistance);
         break;
       case ELEMENTAL_DAMAGE.TOXIN:
-        damageMultiplier += attacker.getBattleStats.magAtk * attacker.getBattleStats.toxinDmg;
+        damageMultiplier += this.resolveDmgTypeAgainstDefType(attacker.getBattleStats.toxinDmg, target.getBattleStats.toxinResistance);
         break;
       case ELEMENTAL_DAMAGE.DARK:
-        damageMultiplier += attacker.getBattleStats.magAtk * attacker.getBattleStats.darkDmg;
+        damageMultiplier += this.resolveDmgTypeAgainstDefType(attacker.getBattleStats.darkDmg, target.getBattleStats.darkResistance);
         break;
       case ELEMENTAL_DAMAGE.LIGHT:
-        damageMultiplier += attacker.getBattleStats.magAtk * attacker.getBattleStats.lightDmg;
+        damageMultiplier += this.resolveDmgTypeAgainstDefType(attacker.getBattleStats.lightDmg, target.getBattleStats.lightResistance);
         break;
     }
 
+    // Prevent inmunity, deals / takes at least 10% of damage.
+    damageMultiplier = Math.max(damageMultiplier, this.MIN_DAMAGE_MULTIPLIER);
+
+    // When target is a Foe. Get weaknesses from the FoeEntity.
+    let exploitedWeakness: DamageType[] = [];
     if (target instanceof FoeEntity) {
-      targetWeaknesses = target.getWeakness;
+      // Match weakness Exploitable vs Weakness Resistance.
+      exploitedWeakness = target.getWeakness.filter((weakness) =>
+        attacker.getDamageData.exploitableWeaknesses.includes(weakness));
     }
 
-    // Filtrar coincidencias
-    attackerExploitable.forEach((weakness) => {
-      if (targetWeaknesses.find((e) => e === weakness)) {
+    // Game rule: Exploitable weakness = +50% damage
+    if (exploitedWeakness.length > 0) damageMultiplier += 0.5;
 
+    // Apply physical or elemental damage
+    damage *= damageMultiplier;
 
-      }
-    });
+    // Apply skill multiplier
+    damage *= skillMultiplier;
 
+    // Apply critical hit chance
     const { criticalTier, critDamage } = this.criticalTier(attacker.getBattleStats.critChance, target.getBattleStats.critDmg)
 
-    return 0
+    // Apply critical damage
+    damage *= critDamage;
+
+    return { damage, criticalTier, exploitedWeakness }
   }
 
   public static getStackMultiplier(stack: number): number {
@@ -88,6 +109,14 @@ export class DamageCalculator {
       critDamage = baseCritDmg * criticalTier;
     }
     return { criticalTier, critDamage };
+  }
+
+  private static resolveAttackAgainstDefense(attack: number, defense: number): number {
+    return Math.max(attack - defense, 1);
+  }
+
+  private static resolveDmgTypeAgainstDefType(attackerStat: number, targetStat: number): number {
+    return attackerStat - targetStat;
   }
 
 }

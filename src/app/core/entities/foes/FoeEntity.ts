@@ -1,6 +1,6 @@
 import { BaseStats, GameEntity, BattleStats, DamageWeaknessData } from "@app/core/entities/gameEntity";
 import { DamageType } from "@app/shared";
-import { clamp } from "@app/shared/utils";
+import { clamp, assertPositive } from "@app/shared/utils";
 
 export class FoeEntity extends GameEntity {
   constructor(
@@ -31,7 +31,7 @@ export class FoeEntity extends GameEntity {
   }
 
   public override takeDamage(incomingDmg: number): void {
-    if (!this.isPositiveValue(incomingDmg)) throw new Error('Value must be positive');
+    assertPositive(incomingDmg);
 
     this.updatePressureDmgBonusScaling();
     incomingDmg *= this._presureBonusMultiplierDmg;
@@ -51,12 +51,12 @@ export class FoeEntity extends GameEntity {
     }
   }
 
-  private set Weakness(w: DamageType) {
+  public set Weakness(w: DamageType) {
     if (this._weakness.find((e) => e === w)) throw new Error("The entity already has this weakness");
     this._weakness.push(w)
   }
 
-  private removeWeakness(w: DamageType) {
+  public removeWeakness(w: DamageType) {
     const index = this._weakness.indexOf(w);
     if (index === -1) throw new Error("The entity does not have this weakness");
     this._weakness.splice(index, 1);

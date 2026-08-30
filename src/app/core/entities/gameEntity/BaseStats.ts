@@ -41,16 +41,16 @@ export class BaseStats {
 
     scaleByLevel(level: number): BaseStats {
         return new BaseStats(
-            this.scaleByLevelCalculator(this._maxHp, level),
-            this.scaleByLevelCalculator(this._speed, level),
-            this.scaleByLevelCalculator(this._physAtk, level),
-            this.scaleByLevelCalculator(this._physDef, level),
+            BaseStats.scaleByLevelCalculator(this._maxHp, level),
+            BaseStats.scaleByLevelCalculator(this._speed, level),
+            BaseStats.scaleByLevelCalculator(this._physAtk, level),
+            BaseStats.scaleByLevelCalculator(this._physDef, level),
             this._critChance,
             this._critDmg,
-            this.scaleByLevelCalculator(this._magAtk, level),
-            this.scaleByLevelCalculator(this._magDef, level),
-            this.scaleByLevelCalculator(this._maxMp, level),
-            this.scaleByLevelCalculator(this._mp, level),
+            BaseStats.scaleByLevelCalculator(this._magAtk, level),
+            BaseStats.scaleByLevelCalculator(this._magDef, level),
+            BaseStats.scaleByLevelCalculator(this._maxMp, level),
+            BaseStats.scaleByLevelCalculator(this._mp, level),
             this._swordDmg,
             this._spearDmg,
             this._axeDmg,
@@ -74,7 +74,7 @@ export class BaseStats {
         );
     }
 
-    private scaleByLevelCalculator(attributeValue: number, level: number): number {
+    private static scaleByLevelCalculator(attributeValue: number, level: number): number {
         const multiplier = (0.1 * level + 1)
         return (attributeValue * multiplier);
     }

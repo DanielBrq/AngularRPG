@@ -117,6 +117,4 @@ export class BattleStats {
         return initBattleStats;
     }
 
-
-
 }

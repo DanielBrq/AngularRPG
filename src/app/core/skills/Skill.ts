@@ -17,11 +17,6 @@ export abstract class Skill {
     //IF boost, apply boost
   }
 
-  protected isNegativeValue(value: number): boolean {
-    if (value < 0) throw new Error('Value must be positive');
-    return value < 0;
-  }
-
   private preventCharacterTarget(target: GameEntityType): void {
     if (target instanceof CharacterEntity) throw new Error('Self attack is not allowed');
   }
