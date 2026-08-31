@@ -13,16 +13,10 @@ export abstract class Skill {
     protected readonly _description: string,
     protected _target: GameEntityType,
     protected _skillOwner: GameEntityType,
-    protected _speed: number,
     protected _skillType: SkillType,
     protected readonly _maxBoostLevel: number = 2,
-
-    protected readonly _baseMpCostOriginal: number = 0,
-    protected readonly _skillMultiplierOriginal: number = 1,
-    protected readonly _currentBoostLevelOriginal: number = 1,
-
-    protected _baseMpCost: number = 0,
-    protected _skillMultiplier: number = 1,
+    protected readonly _baseMpCost: number = 0,
+    protected readonly _skillMultiplier: number = 1,
   ) { }
 
   protected execute(target: GameEntityType): void { }

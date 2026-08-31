@@ -1,5 +1,5 @@
 import { Skill, BP } from '@app/core/skills/Skill';
-import { FoeEntity, GameEntityType } from '@app/core/entities';
+import { CharacterEntity, FoeEntity, GameEntityType } from '@app/core/entities';
 import { SKILL } from '@app/shared/types';
 import { DAMAGE } from '@app/shared/types';
 
@@ -7,11 +7,7 @@ export class HeavySliceSkill extends Skill {
   constructor(
     target: GameEntityType,
     skillOwner: GameEntityType,
-    speed: number = 10,
     maxBoostLevel: number = 3,
-    baseMpCostOriginal: number = 50,
-    skillMultiplierOriginal: number = 1,
-    currentBoostLevelOriginal: number = 1,
     baseMpCost: number = 50,
     skillMultiplier: number = 1,
   ) {
@@ -20,12 +16,8 @@ export class HeavySliceSkill extends Skill {
       'Deals physical damage to a single target.',
       target,
       skillOwner,
-      speed,
       SKILL.OFENSIVE,
       maxBoostLevel,
-      baseMpCostOriginal,
-      skillMultiplierOriginal,
-      currentBoostLevelOriginal,
       baseMpCost,
       skillMultiplier,
     );
@@ -42,38 +34,31 @@ export class HeavySliceSkill extends Skill {
 
   public override execute(target: GameEntityType, bp?: BP): void {
     this.preventDeadTarget(target);
-    if (target instanceof FoeEntity) { this.preventFoeTarget(target) }
-    else { this.preventCharacterTarget(target); }
-
-    let mpCostMultiplier = 1;
-    let skillMultiplier = 1;
-    let speedMultiplier = 1;
-
-    if (bp) {
-      const { mpCostMultiplier, skillMultiplier, speedMultiplier } =
-        this.previewSkillBoostResult(bp.efficiency, bp.strength, bp.speed);
-
-      //Skill mutations
-      this._skillOwner.getBattleStats.physAtk *= skillMultiplier;
-      this._skillOwner.getBattleStats.speed *= speedMultiplier;
-      this._baseMpCost *= mpCostMultiplier;
+    if (target instanceof CharacterEntity) {
+      this.preventCharacterTarget(target);
+    } else {
+      this.preventFoeTarget(target);
     }
 
-    //Execute skill
-    target.attack(target, DAMAGE.SWORD, this._skillMultiplier);
+    const boost = bp
+      ? this.previewSkillBoostResult(bp.efficiency, bp.strength, bp.speed)
+      : { mpCostMultiplier: 1, skillMultiplier: 1, speedMultiplier: 1 };
 
-    // Reset stats
-    if (bp) {
-      this._skillOwner.getBattleStats.physAtk *= (skillMultiplier * - 1);
-      this._skillOwner.getBattleStats.speed *= (speedMultiplier * - 1);
-      this._baseMpCost *= (mpCostMultiplier * - 1);
-      this.resetSkillBoost();
+    const finalMpCost = this._baseMpCost * boost.mpCostMultiplier;
+    if (this._skillOwner.getBattleStats.mp < finalMpCost) throw new Error('Not enough MP');
+    this._skillOwner.getBattleStats.mp -= finalMpCost;
+
+    // Temporary stat boosts for attack execution
+    this._skillOwner.getBattleStats.physAtk *= boost.skillMultiplier;
+    this._skillOwner.getBattleStats.speed *= boost.speedMultiplier;
+
+    try {
+      this._skillOwner.attack(target, DAMAGE.SWORD, this._skillMultiplier);
+    } finally {
+      this._skillOwner.getBattleStats.physAtk /= boost.skillMultiplier;
+      this._skillOwner.getBattleStats.speed /= boost.speedMultiplier;
     }
-  }
-
-  public resetSkillBoost(): void {
-    this._baseMpCost = this._baseMpCostOriginal;
-    this._skillMultiplier = this._skillMultiplierOriginal;
   }
 }
+
 
