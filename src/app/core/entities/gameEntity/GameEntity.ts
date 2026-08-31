@@ -43,14 +43,12 @@ export abstract class GameEntity {
     }
   }
 
-  protected attack(target: GameEntity, damageBasedOn: DamageType, skillMultiplier?: number): void {
+  public attack(target: GameEntity, damageBasedOn: DamageType, skillMultiplier?: number): void {
     const result: { damage: number, criticalTier: number, exploitedWeakness: DamageType[] } = DamageCalculator.calcDmg(this, target, damageBasedOn, skillMultiplier,);
 
     // TODO: publish result on event to show it in HUD
 
     target.takeDamage(result.damage);
-
-    // TODO: Clamp(totalDmg, dmgLimit) - implement dmg limit feature
   }
 
   public attackRandomTarget(target: GameEntity[], damageBasedOn: DamageType, skillMultiplier?: number): void {
@@ -89,25 +87,6 @@ export abstract class GameEntity {
   // Validators
   protected hasEnoughMP(cost: number): boolean { return this._battleStats.mp >= cost }
 
-  public addPhysAtk(value: number): void {
-    assertPositive(value);
-    this._battleStats.physAtk += value;
-  }
-
-  public lowerPhysAtk(value: number): void {
-    assertPositive(value);
-    this._battleStats.physAtk -= value;
-  }
-
-  public addMagAtk(value: number): void {
-    assertPositive(value);
-    this._battleStats.magAtk += value;
-  }
-
-  public lowerMagAtk(value: number): void {
-    assertPositive(value);
-    this._battleStats.magAtk -= value;
-  }
 
   public addResistance(value: number, resistanceType: DamageType): void {
     assertPositive(value);

@@ -2,7 +2,7 @@ import { BaseStats, BuildStats, GameEntity, BattleStats, DamageWeaknessData } fr
 import { Skill } from '@app/core/skills/';
 import { Equipment } from "@app/core/items";
 import { Effect } from "@app/core/effects/Effect";
-import { EQUIPMENT, WEAPONS } from '@app/shared';
+import { clamp, EQUIPMENT, WEAPONS } from '@app/shared';
 
 export class CharacterEntity extends GameEntity {
   constructor(
@@ -15,6 +15,7 @@ export class CharacterEntity extends GameEntity {
     skills: Skill[] = [],
     effects: Effect[] = [],
     damageData: DamageWeaknessData,
+    private _bp: number = 2,
     private _buildStats: BuildStats,
     private _weapon?: Equipment,
     private _helmet?: Equipment,
@@ -106,6 +107,13 @@ export class CharacterEntity extends GameEntity {
     if (!req) throw new Error("Not found");
     req.removeOwner = this._id;
     this._weapon = undefined;
+  }
+
+  public get getBP(): number { return this._bp; }
+
+  public addBP(value: number, maxLimit: number = 7) {
+    if (value <= 0) throw new Error("BP must be greater than 0");
+    this._bp += clamp(value, maxLimit);
   }
 
   private equipSlot(equipment: Equipment, current?: Equipment): Equipment {
