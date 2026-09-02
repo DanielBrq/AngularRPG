@@ -1,6 +1,6 @@
-import { Equipment } from "@app/core/items";
-import { EquipmentType, WeaponType } from "@app/shared";
-import { ItemStats } from "@app/core/items";
+import { Equipment } from "@src/app/core/items";
+import { EquipmentType, WeaponType } from "@src/app/shared";
+import { ItemStats } from "@src/app/core/items";
 
 export class EquipmentFactory {
 

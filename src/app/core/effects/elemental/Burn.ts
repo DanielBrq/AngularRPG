@@ -1,7 +1,7 @@
-import { Effect } from '@app/core/effects/Effect';
-import { STATUS_EFFECTS } from '@app/shared/types';
-import { GameEntityType } from '@app/core/entities';
-import { DamageCalculator } from '@app/core/combat';
+import { Effect } from '@src/app/core/effects/Effect';
+import { STATUS_EFFECTS } from '@src/app/shared/types';
+import { GameEntityType } from '@src/app/core/entities';
+import { DamageCalculator } from '@src/app/core/combat';
 
 export class Burn extends Effect {
   constructor(

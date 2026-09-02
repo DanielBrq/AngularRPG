@@ -1,7 +1,7 @@
-import { BaseStats, GameEntity, BattleStats, DamageWeaknessData } from "@app/core/entities/gameEntity";
-import { Skill } from "@app/core/skills";
-import { DamageType } from "@app/shared";
-import { clamp, assertPositive } from "@app/shared/utils";
+import { BaseStats, GameEntity, BattleStats, DamageWeaknessData } from "@src/app/core/entities/gameEntity";
+import { Skill } from "@src/app/core/skills";
+import { DamageType } from "@src/app/shared";
+import { clamp, assertPositive } from "@src/app/shared/utils";
 
 export class FoeEntity extends GameEntity {
   constructor(

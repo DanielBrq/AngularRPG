@@ -1,6 +1,6 @@
-import { Skill } from '@app/core/skills/Skill';
-import { GameEntityType } from '@app/core/entities';
-import { SKILL } from '@app/shared/types';
+import { Skill } from '@src/app/core/skills/Skill';
+import { GameEntityType } from '@src/app/core/entities';
+import { SKILL } from '@src/app/shared/types';
 
 export class BlazingWaterfallSkill extends Skill {
   constructor(

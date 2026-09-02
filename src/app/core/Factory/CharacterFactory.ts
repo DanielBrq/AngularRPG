@@ -1,7 +1,7 @@
-import { BaseStats, BattleStats, BuildStats, CharacterEntity, DamageWeaknessData } from '@app/core/entities'
-import { CharactersMetadata } from '@app/shared/types';
-import { Skill } from '@app/core/skills/';
-import { Equipment } from "@app/core/items";
+import { BaseStats, BattleStats, BuildStats, CharacterEntity, DamageWeaknessData } from '@src/app/core/entities'
+import { CharactersMetadata } from '@src/app/shared/types';
+import { Skill } from '@src/app/core/skills/';
+import { Equipment } from "@src/app/core/items";
 
 export class CharacterFactory {
 

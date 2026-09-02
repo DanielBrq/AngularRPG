@@ -1,4 +1,4 @@
-import { CharacterEntity, FoeEntity, GameEntity } from "@app/core/entities/";
+import { CharacterEntity, FoeEntity, GameEntity } from "@src/app/core/entities/";
 
 
 export class BattleTurnsSystem {

@@ -1,6 +1,6 @@
-import { Effect } from '@app/core/effects/Effect';
-import { STATUS_EFFECTS } from '@app/shared/types';
-import { GameEntityType } from '@app/core/entities';
+import { Effect } from '@src/app/core/effects/Effect';
+import { STATUS_EFFECTS } from '@src/app/shared/types';
+import { GameEntityType } from '@src/app/core/entities';
 
 export class Paralysis extends Effect {
   constructor(

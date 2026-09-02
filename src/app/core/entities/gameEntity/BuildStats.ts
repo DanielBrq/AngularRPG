@@ -1,4 +1,4 @@
-import { Equipment } from "@app/core/items";
+import { Equipment } from "@src/app/core/items";
 
 /* Extra Stats comming from
 team composition buffs, equipment: Items, Weapons and Armor. (static values, no realtime)*/

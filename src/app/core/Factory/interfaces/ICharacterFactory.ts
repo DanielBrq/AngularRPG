@@ -1,6 +1,6 @@
-import { DamageWeaknessData } from '@app/core/entities'
-import { Equipment } from '@app/core/items';
-import { Skill } from '@app/core/skills';
+import { DamageWeaknessData } from '@src/app/core/entities'
+import { Equipment } from '@src/app/core/items';
+import { Skill } from '@src/app/core/skills';
 
 export interface ICharacterFactory {
     id: string,

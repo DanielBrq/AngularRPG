@@ -1,8 +1,8 @@
-import { BaseStats, BuildStats, GameEntity, BattleStats, DamageWeaknessData } from "@app/core/entities/gameEntity";
-import { Skill } from '@app/core/skills/';
-import { Equipment } from "@app/core/items";
-import { Effect } from "@app/core/effects/Effect";
-import { clamp, EQUIPMENT, WEAPONS } from '@app/shared';
+import { BaseStats, BuildStats, GameEntity, BattleStats, DamageWeaknessData } from "@src/app/core/entities/gameEntity";
+import { Skill } from '@src/app/core/skills/';
+import { Equipment } from "@src/app/core/items";
+import { Effect } from "@src/app/core/effects/Effect";
+import { clamp, EQUIPMENT, WEAPONS } from '@src/app/shared';
 
 export class CharacterEntity extends GameEntity {
   constructor(

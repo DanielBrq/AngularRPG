@@ -1,6 +1,6 @@
-import { Effect } from '@app/core/effects/Effect';
-import { STATUS_EFFECTS } from '@app/shared/types';
-import { GameEntityType } from '@app/core/entities';
+import { Effect } from '@src/app/core/effects/Effect';
+import { STATUS_EFFECTS } from '@src/app/shared/types';
+import { GameEntityType } from '@src/app/core/entities';
 
 export class Frostbite extends Effect {
   constructor(
@@ -13,19 +13,19 @@ export class Frostbite extends Effect {
       duration: number;
       stack: number;
     } = {
-      speedReductionRatio: 0.05,
-      duration: duration,
-      stack: stack,
-    },
+        speedReductionRatio: 0.05,
+        duration: duration,
+        stack: stack,
+      },
     public override effectSnapshot: {
       speedReductionRatio: number;
       duration: number;
       stack: number;
     } = {
-      speedReductionRatio: 0.05,
-      duration: duration,
-      stack: stack,
-    },
+        speedReductionRatio: 0.05,
+        duration: duration,
+        stack: stack,
+      },
   ) {
     super(
       'Frostbite',

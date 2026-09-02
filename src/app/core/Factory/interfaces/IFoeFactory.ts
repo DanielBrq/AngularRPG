@@ -1,5 +1,5 @@
-import { DamageWeaknessData } from '@app/core/entities'
-import { Skill } from '@app/core/skills';
+import { DamageWeaknessData } from '@src/app/core/entities'
+import { Skill } from '@src/app/core/skills';
 
 export interface IFoeFactory {
     id: string,

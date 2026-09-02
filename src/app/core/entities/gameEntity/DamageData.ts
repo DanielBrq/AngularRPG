@@ -1,4 +1,4 @@
-import { DamageType } from "@app/shared";
+import { DamageType } from "@src/app/shared";
 
 export class DamageWeaknessData {
     constructor(

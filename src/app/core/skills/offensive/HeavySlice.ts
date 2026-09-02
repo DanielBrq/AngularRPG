@@ -1,7 +1,7 @@
-import { Skill, BP } from '@app/core/skills/Skill';
-import { CharacterEntity, FoeEntity, GameEntityType } from '@app/core/entities';
-import { SKILL } from '@app/shared/types';
-import { DAMAGE } from '@app/shared/types';
+import { Skill, BP } from '@src/app/core/skills/Skill';
+import { CharacterEntity, FoeEntity, GameEntityType } from '@src/app/core/entities';
+import { SKILL } from '@src/app/shared/types';
+import { DAMAGE } from '@src/app/shared/types';
 
 export class HeavySliceSkill extends Skill {
   constructor(

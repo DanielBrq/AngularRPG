@@ -1,5 +1,5 @@
-import { SkillType } from '@app/shared/types';
-import { CharacterEntity, FoeEntity, GameEntityType } from '@app/core/entities';
+import { SkillType } from '@src/app/shared/types';
+import { CharacterEntity, FoeEntity, GameEntityType } from '@src/app/core/entities';
 import { Effect } from '../effects';
 
 export type BP = {

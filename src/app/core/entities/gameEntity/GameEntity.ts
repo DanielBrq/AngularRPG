@@ -1,9 +1,9 @@
-import { BaseStats, CharacterEntity, FoeEntity, BattleStats, DamageWeaknessData } from "@app/core/entities";
-import { Randomizer, assertPositive, clamp } from '@app/shared/utils';
-import { Skill } from '@app/core/skills';
-import { Effect } from "@app/core/effects/Effect";
-import { DamageCalculator } from '@app/core/combat';
-import { DamageType, ELEMENTAL_DAMAGE, PHYSICAL_DAMAGE } from '@app/shared/types/';
+import { BaseStats, CharacterEntity, FoeEntity, BattleStats, DamageWeaknessData } from "@src/app/core/entities";
+import { Randomizer, assertPositive, clamp } from '@src/app/shared/utils';
+import { Skill } from '@src/app/core/skills';
+import { Effect } from "@src/app/core/effects/Effect";
+import { DamageCalculator } from '@src/app/core/combat';
+import { DamageType, ELEMENTAL_DAMAGE, PHYSICAL_DAMAGE } from '@src/app/shared/types/';
 
 
 export type GameEntityType = CharacterEntity | FoeEntity

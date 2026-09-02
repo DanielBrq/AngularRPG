@@ -1,6 +1,6 @@
-import { Effect } from '@app/core/effects/Effect';
-import { GameEntityType } from '@app/core/entities';
-import { SPECIAL_EFFECTS } from '@app/shared/types';
+import { Effect } from '@src/app/core/effects/Effect';
+import { GameEntityType } from '@src/app/core/entities';
+import { SPECIAL_EFFECTS } from '@src/app/shared/types';
 
 export class SurvivalInstinctEffect extends Effect {
   private _applied: boolean = false;

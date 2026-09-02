@@ -1,5 +1,5 @@
-import { Item, ItemStats } from "@app/core/items";
-import { EquipmentType, WeaponType } from '@app/shared';
+import { Item, ItemStats } from "@src/app/core/items";
+import { EquipmentType, WeaponType } from '@src/app/shared';
 
 export class Equipment extends Item {
     constructor(

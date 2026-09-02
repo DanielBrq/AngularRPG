@@ -1,7 +1,7 @@
-import { Skill, BP } from '@app/core/skills/Skill';
-import { GameEntityType } from '@app/core/entities';
-import { CharactersMetadata, SKILL } from '@app/shared/types';
-import { MonarchShardEffect } from '@app/core/effects';
+import { Skill, BP } from '@src/app/core/skills/Skill';
+import { GameEntityType } from '@src/app/core/entities';
+import { CharactersMetadata, SKILL } from '@src/app/shared/types';
+import { MonarchShardEffect } from '@src/app/core/effects';
 
 export class MonarchShard extends Skill {
   private readonly _effectInstance: MonarchShardEffect;

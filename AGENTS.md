@@ -10,7 +10,7 @@ Read necesary file only depending of user request (save tokens and speed up resp
 
 ## Import conventions
 
-- Internal imports use the `@app/*` alias → `src/app/*`. Use it instead of relative `../..` paths.
+- Internal imports use the `@src/*` alias → `src/*`. Use it instead of relative `../..` paths.
 
 ## Architecture (src/app)
 

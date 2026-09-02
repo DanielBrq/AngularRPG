@@ -1,6 +1,6 @@
-import { GameEntityType } from '@app/core/entities/gameEntity';
-import { clamp } from '@app/shared/utils';
-import { STATUS_EFFECTS, STAT_MODIFIERS_EFFECTS, PASSIVE_EFFECTS, SPECIAL_EFFECTS } from '@app/shared/types/EffectType';
+import { GameEntityType } from '@src/app/core/entities/gameEntity';
+import { clamp } from '@src/app/shared/utils';
+import { STATUS_EFFECTS, STAT_MODIFIERS_EFFECTS, PASSIVE_EFFECTS, SPECIAL_EFFECTS } from '@src/app/shared/types/EffectType';
 
 export type EffectType = STATUS_EFFECTS | STAT_MODIFIERS_EFFECTS | PASSIVE_EFFECTS | SPECIAL_EFFECTS;
 

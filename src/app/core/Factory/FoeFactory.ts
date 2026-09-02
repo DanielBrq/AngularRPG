@@ -1,7 +1,7 @@
-import { BaseStats, BattleStats, DamageWeaknessData } from "@app/core/entities";
-import { FoeEntity } from "@app/core/entities/foes";
-import { Skill } from "@app/core/skills";
-import { DamageType } from "@app/shared";
+import { BaseStats, BattleStats, DamageWeaknessData } from "@src/app/core/entities";
+import { FoeEntity } from "@src/app/core/entities/foes";
+import { Skill } from "@src/app/core/skills";
+import { DamageType } from "@src/app/shared";
 
 export class FoeFactory {
 

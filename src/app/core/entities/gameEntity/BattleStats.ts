@@ -1,4 +1,4 @@
-import { BaseStats, BuildStats } from "@app/core/entities";
+import { BaseStats, BuildStats } from "@src/app/core/entities";
 
 export class BattleStats {
     constructor(

@@ -1,7 +1,7 @@
-import { DamageType, ELEMENTAL_DAMAGE, PHYSICAL_DAMAGE } from '@app/shared/types/';
-import { Randomizer } from '@app/shared/utils/Randomizer';
-import { BattleStats, FoeEntity, GameEntity } from '@app/core/entities';
-import { clamp } from '@app/shared';
+import { DamageType, ELEMENTAL_DAMAGE, PHYSICAL_DAMAGE } from '@src/app/shared/types/';
+import { Randomizer } from '@src/app/shared/utils/Randomizer';
+import { BattleStats, FoeEntity, GameEntity } from '@src/app/core/entities';
+import { clamp } from '@src/app/shared';
 
 export class DamageCalculator {
   private static readonly MIN_DAMAGE_MULTIPLIER = 0.1;

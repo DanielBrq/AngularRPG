@@ -1,7 +1,7 @@
-import { Skill, BP } from '@app/core/skills/Skill';
-import { GameEntityType } from '@app/core/entities';
-import { CharactersMetadata, SKILL } from '@app/shared/types';
-import { TheDullBladeEffect } from '@app/core/effects';
+import { Skill, BP } from '@src/app/core/skills/Skill';
+import { GameEntityType } from '@src/app/core/entities';
+import { CharactersMetadata, SKILL } from '@src/app/shared/types';
+import { TheDullBladeEffect } from '@src/app/core/effects';
 
 export class TheDullBlade extends Skill {
   private readonly _effectInstance: TheDullBladeEffect;

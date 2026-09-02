@@ -1,5 +1,5 @@
-import { ItemStats } from "@app/core/items";
-import { EquipmentType, WeaponType } from "@app/shared";
+import { ItemStats } from "@src/app/core/items";
+import { EquipmentType, WeaponType } from "@src/app/shared";
 
 export interface IEquipmentFactory {
     id: string;
