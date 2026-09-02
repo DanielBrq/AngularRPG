@@ -1,12 +1,12 @@
 import { SkillType } from '@app/shared/types';
 import { CharacterEntity, FoeEntity, GameEntityType } from '@app/core/entities';
+import { Effect } from '../effects';
 
 export type BP = {
   efficiency: number;
   strength: number;
   speed: number;
 }
-
 export abstract class Skill {
   constructor(
     protected readonly _name: string,
@@ -14,12 +14,13 @@ export abstract class Skill {
     protected _target: GameEntityType,
     protected _skillOwner: GameEntityType,
     protected _skillType: SkillType,
+    protected _effect: Effect[] = [],
     protected readonly _maxBoostLevel: number = 2,
     protected readonly _baseMpCost: number = 0,
     protected readonly _skillMultiplier: number = 1,
   ) { }
 
-  protected execute(target: GameEntityType): void { }
+  protected execute(target: GameEntityType | GameEntityType[]): void { }
 
   protected getDescription(efficiencyBP: number = 0, strengthBP: number = 0, speedBP: number = 0) { }
 
@@ -78,16 +79,26 @@ export abstract class Skill {
     return this._skillType;
   }
 
+  protected increaseEffectsDuration(duration: number = 1): void {
+    if (!this._effect || this._effect.length == 0) return;
+    this._effect.forEach(effect => effect.increaseDuration(duration));
+  }
+
+  protected decreaseEffectsDuration(duration: number = 1): void {
+    if (!this._effect || this._effect.length == 0) return;
+    this._effect.forEach(effect => effect.decreaseDuration(duration));
+    this._effect = this._effect.filter(effect => !effect.isExpired());
+  }
+
   protected preventCharacterTarget(target: GameEntityType): void {
     if (target instanceof CharacterEntity) throw new Error('Self attack is not allowed');
   }
 
-  protected preventDeadTarget(target: GameEntityType): void {
-    if (target.isAlive === false) throw new Error('Target is dead');
+  protected preventDeadTarget(target?: GameEntityType): void {
+    if (target && target.isAlive === false) throw new Error('Target is dead');
   }
 
   protected preventFoeTarget(target: GameEntityType): void {
     if (target instanceof FoeEntity) throw new Error('Target is a foe');
   }
-
 }

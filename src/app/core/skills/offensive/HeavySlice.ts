@@ -13,10 +13,11 @@ export class HeavySliceSkill extends Skill {
   ) {
     super(
       'Heavy Slice',
-      'Deals physical damage to a single target.',
+      'Deals physical sword damage to a single target.',
       target,
       skillOwner,
       SKILL.OFENSIVE,
+      [],
       maxBoostLevel,
       baseMpCost,
       skillMultiplier,
@@ -26,7 +27,7 @@ export class HeavySliceSkill extends Skill {
   public override getDescription(efficiencyBP: number = 0, strengthBP: number = 0, speedBP: number = 0): string {
     const { mpCostMultiplier, skillMultiplier, speedMultiplier } =
       this.previewSkillBoostResult(efficiencyBP, strengthBP, speedBP);
-    return `Deals physical damage to a single target.
+    return `Deals physical sword damage to a single target.
       Mp cost: ${this._baseMpCost * mpCostMultiplier}
       Skill multiplier: ${skillMultiplier * 100}%
       Speed multiplier: ${speedMultiplier * 100}%`;

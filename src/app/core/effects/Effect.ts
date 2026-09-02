@@ -1,8 +1,8 @@
 import { GameEntityType } from '@app/core/entities/gameEntity';
 import { clamp } from '@app/shared/utils';
-import { STATUS_EFFECTS, MODIFIERS_EFFECTS, PASSIVE_EFFECTS, SPECIAL_EFFECTS } from '@app/shared/types/EffectType';
+import { STATUS_EFFECTS, STAT_MODIFIERS_EFFECTS, PASSIVE_EFFECTS, SPECIAL_EFFECTS } from '@app/shared/types/EffectType';
 
-export type EffectType = STATUS_EFFECTS | MODIFIERS_EFFECTS | PASSIVE_EFFECTS | SPECIAL_EFFECTS;
+export type EffectType = STATUS_EFFECTS | STAT_MODIFIERS_EFFECTS | PASSIVE_EFFECTS | SPECIAL_EFFECTS;
 
 export abstract class Effect {
   constructor(
@@ -13,6 +13,8 @@ export abstract class Effect {
     protected _stack: number,
     protected _duration: number,
     protected _isBeneficial: boolean,
+    protected baseEffect: Object,
+    protected effectSnapshot: Object,
   ) { }
 
   abstract apply(target: GameEntityType): void;
@@ -23,7 +25,7 @@ export abstract class Effect {
   }
 
   public get isBeneficial(): boolean {
-    return this.isBeneficial;
+    return this._isBeneficial;
   }
 
   public get getDuration(): number {
@@ -39,6 +41,10 @@ export abstract class Effect {
   }
 
   public decreaseDuration(turns: number = 1): void {
+    if (this._duration <= 0) {
+      this.expire();
+      return;
+    }
     this._duration = clamp(this._duration - turns, 9);
   }
 

@@ -6,7 +6,7 @@ export const STATUS_EFFECTS = {
 } as const;
 export type STATUS_EFFECTS = (typeof STATUS_EFFECTS)[keyof typeof STATUS_EFFECTS];
 
-export const MODIFIERS_EFFECTS = {
+export const STAT_MODIFIERS_EFFECTS = {
   PHYS_ATK_UP: 'phys_atk_up',
   PHYS_ATK_DOWN: 'phys_atk_down',
   PHYS_DEFENCE_UP: 'phys_defence_up',
@@ -60,7 +60,7 @@ export const MODIFIERS_EFFECTS = {
   DARK_RESISTANCE_UP: 'dark_resistance_up',
   DARK_RESISTANCE_DOWN: 'dark_resistance_down',
 } as const;
-export type MODIFIERS_EFFECTS = (typeof MODIFIERS_EFFECTS)[keyof typeof MODIFIERS_EFFECTS];
+export type STAT_MODIFIERS_EFFECTS = (typeof STAT_MODIFIERS_EFFECTS)[keyof typeof STAT_MODIFIERS_EFFECTS];
 
 export const PASSIVE_EFFECTS = {
   BLIND: 'blind', // + Chance to miss hit

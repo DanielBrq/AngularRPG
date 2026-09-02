@@ -16,6 +16,7 @@ export class BlazingWaterfallSkill extends Skill {
       target,
       skillOwner,
       SKILL.OFENSIVE,
+      [],
       maxBoostLevel,
       baseMpCost,
       skillMultiplier,
