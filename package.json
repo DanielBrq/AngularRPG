@@ -3,13 +3,13 @@
   "version": "0.5.0",
   "scripts": {
     "ng": "ng",
-    "start": "bun run --bun ng serve --hmr",
-    "build": "bun run --bun ng build",
+    "start": "ng serve --hmr",
+    "build": "ng build",
     "watch": "ng build --watch --configuration development",
     "test": "ng test"
   },
   "private": true,
-  "packageManager": "bun",
+  "packageManager": "pnpm@12.6.0",
   "dependencies": {
     "@angular/common": "^22.2.0",
     "@angular/compiler": "^22.2.0",

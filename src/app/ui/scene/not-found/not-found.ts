@@ -1,12 +1,12 @@
 import { Component } from '@angular/core';
 
 @Component({
-  imports: [],
+  standalone: true,
   selector: 'app-not-found',
   styles: '',
   template: `
-  <div class="flex w-auto">
-    <h1 class="text-6xl">Not Found</h1>
+  <div class="flex w-full justify-center items-center h-screen">
+    <h1 class="text-6xl text-amber-800 font-semibold">Not Found</h1>
   </div>
   `,
 })
