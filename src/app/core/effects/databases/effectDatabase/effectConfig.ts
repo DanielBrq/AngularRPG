@@ -13,6 +13,8 @@ export type statModifierEffectId =
     'cold_dmg_up' | 'cold_dmg_down' |
     'lightning_dmg_up' | 'lightning_dmg_down' |
     'toxin_dmg_up' | 'toxin_dmg_down' |
+    'solidification_dmg_up' | 'solidification_dmg_down' |
+    'wind_dmg_up' | 'wind_dmg_down' |
     'dark_dmg_up' | 'dark_dmg_down' |
     'light_dmg_up' | 'light_dmg_down' |
     'heat_def_up' | 'heat_def_down' |
@@ -26,7 +28,7 @@ export type elementalEffectId = 'burn' | 'frostbite' | 'electrified' | 'poison' 
 
 export type statusEffectId = statModifierEffectId | elementalEffectId;
 
-export interface EffectConfig {
+export interface EffectData {
     readonly name: string;
     readonly description: string;
     readonly type: 'buffs' | 'debuffs' | 'elemental' | 'special';

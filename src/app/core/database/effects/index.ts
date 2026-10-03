@@ -1,5 +1,0 @@
-export * from '@src/app/core/database/effects/effectConfig'
-export * from '@src/app/core/database/effects/buffEffect'
-export * from '@src/app/core/database/effects/debuffEffect'
-export * from '@src/app/core/database/effects/elementalEffect'
-export * from '@src/app/core/database/effects/specialEffect'
