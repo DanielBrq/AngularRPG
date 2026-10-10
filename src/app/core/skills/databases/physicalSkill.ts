@@ -8,6 +8,7 @@ export const PHYSICAL_SKILLS: Record<string, SkillData> = {
         baseMpCost: 0,
         baseMaxBoostLevel: 3,
         baseSkillMultiplier: 1,
+        skillSpeedMultiplier: 1,
         boost: {
             MpCost: 0,
             skillMultiplier: 1,

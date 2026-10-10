@@ -1,5 +1,5 @@
-import { EffectConfig } from '@src/app/core/effects/databases/effectDatabase';
+import { EffectData } from '@src/app/core/effects/databases/effectDatabase';
 
-export const PASSIVE_SKILLS: Record<string, EffectConfig> = {
+export const PASSIVE_SKILLS: Record<string, EffectData> = {
 
 }

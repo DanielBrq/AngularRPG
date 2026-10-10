@@ -1,6 +1,6 @@
-import { EffectConfig } from '@src/app/core/effects/databases/effectDatabase';
+import { EffectData } from '@src/app/core/effects/databases/effectDatabase';
 
-export const ELEMENTAL_EFFECTS: Record<string, EffectConfig> = {
+export const ELEMENTAL_EFFECTS: Record<string, EffectData> = {
     BURN: {
         name: 'burn',
         description: `Deals heat damage each turn`,
