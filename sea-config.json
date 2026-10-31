@@ -1,0 +1,6 @@
+{
+  "main": "dist-server/bundled-server.mjs",
+  "mainFormat": "module",
+  "output": "mi-app.exe",
+  "disableExperimentalSEAWarning": true
+}
